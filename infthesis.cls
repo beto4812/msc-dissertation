@@ -387,6 +387,11 @@ Computer Science}}
 
 \ifthenelse{\boolean{useabbrevs}}
  {\newcommand{\NB}{N.B.\@\xspace}
+  \newcommand{\NOTWO}{NO\textsubscript{2}\@\xspace}
+  \newcommand{\OTHREE}{O\textsubscript{3}\@\xspace}
+  \newcommand{\SOTWO}{SO\textsubscript{2}\@\xspace}
+  \newcommand{\NOX}{NO\textsubscript{x}\@\xspace}
+  \newcommand{\PMTEN}{PM\textsubscript{10}\@\xspace}
   \newcommand{\eg}{e.g.\@\xspace}
   \newcommand{\Eg}{E.g.\@\xspace}
   \newcommand{\ie}{i.e.\@\xspace}

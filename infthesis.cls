@@ -547,6 +547,13 @@ Computer Science}}
      \begin{quotation}\rm}
     {\end{quotation}\end{frontenv}}
 
+\newcommand{\accronName}{Acronyms}
+
+\newenvironment{accron}
+   {\begin{frontenv}{\accronName}{\LARGE}}
+   {\end{frontenv}\newpage}
+
+
 %%
 %% Based upon the above abstract env., provide wrappers for
 %% an acknowledgements and declation env.

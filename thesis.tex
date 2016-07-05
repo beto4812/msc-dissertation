@@ -24,16 +24,17 @@
 % For symbols and equations 
 \usepackage{latexsym}
 \usepackage{amsmath}
+\usepackage{acronym}
 
 %% Information about the title, etc.
 \title{Personalized Air Quality Visualization and Tracking}
 \author{Alberto Vazquez Martinez}
 
 %% Specify the abstract here.
-\abstract{%
-
-Abstract for my Report
-}
+%\abstract{%
+%
+%Abstract for my Report
+%}
 
 \begin{document}
 
@@ -43,14 +44,18 @@ Abstract for my Report
 \maketitle
 
 %% Create the table of contents
+\standarddeclaration
+\dedication{To my mummy.}
 \tableofcontents
 \listoffigures
 \listoftables
+\begin{accron}\input{acronyms}\end{accron}
 
 \end{preliminary}
 
-
-\include{chapters/Chapter-Introduction}
+\include{1-introduction/0-Chapter-Introduction}
+\include{2-background/0-Chapter-Background}
+\include{3-methodology/0-Chapter-Methodology}
 
 \bibliography{mendeley}
 \bibliographystyle{IEEEtranN}

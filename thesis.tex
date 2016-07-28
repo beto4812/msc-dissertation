@@ -9,6 +9,9 @@
 % This package is for times font
 \usepackage{times}
 
+% Adjust tables
+\usepackage{adjustbox}
+
 % This package is for Informatics thesis style
 \usepackage{eushield}
 
@@ -21,10 +24,24 @@
 % This package is for urls
 \usepackage{url}
 
+%Prevents placing floats before a section.
+\usepackage[section]{placeins}
+
+% Degree command
+\usepackage{gensymb}
+
 % For symbols and equations 
 \usepackage{latexsym}
 \usepackage{amsmath}
 \usepackage{acronym}
+
+% Using urls
+
+\usepackage{url}
+
+% Referencing in center
+\usepackage{csquotes}
+\renewcommand{\mkbegdispquote}[2]{\itshape}
 
 %% Information about the title, etc.
 \title{Personalized Air Quality Visualization and Tracking}
@@ -56,6 +73,11 @@
 \include{1-introduction/0-Chapter-Introduction}
 \include{2-background/0-Chapter-Background}
 \include{3-methodology/0-Chapter-Methodology}
+\include{4-analysis/0-Chapter-Analysis}
+\include{5-design/0-Chapter-Design}
+\include{6-implementation/0-Chapter-Implementation}
+\include{7-evaluation/0-Chapter-Evaluation}
+\include{8-conclusion/0-Chapter-Conclusion}
 
 \bibliography{mendeley}
 \bibliographystyle{IEEEtranN}

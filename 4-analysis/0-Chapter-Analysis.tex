@@ -1,4 +1,4 @@
-\chapter{Analysis}
+\chapter{Analysis and Design}
 The focus of this chapter is to establish and discuss what is the software going to do, and how is going to achieve its intended goals. The actors in defining this are the stakeholders. The process of doing so is through the requirements elicitation. It is important to mention that  
 
 \section{Users and stakeholders}
@@ -77,11 +77,11 @@ When designing the questionnaire, there was an interest in knowing which existin
 The total number of responses were 11, 8 of them being from the patient group, and 3 of them from the general public. The ages of the respondents were varied: 3 between 25-34, 3 between 65-74, 2 between 18-24, 2 between 35-44 and one between 55-64 years old as shown in the figure \ref{fig:survey_ages}. 
 
 \begin{figure}[H]
-\begin{adjustbox}{width=.6\textwidth,center=\textwidth}
+\begin{adjustbox}{width=1\textwidth,center=\textwidth}
   \centering
   \includegraphics[scale=1]{images/ages_survey.png}
 \end{adjustbox}
-  \caption[The data visualization process \cite{KeimDaniel2010} ]{The data visualization process \cite{KeimDaniel2010} }
+  \caption[Survey respondents ages ]{Survey respondents ages}
   \label{fig:survey_ages}
 \end{figure}
 
@@ -91,7 +91,7 @@ The main findings from the survey were the potential new functionalities that us
 
 
 \begin{figure}[H]
-\begin{adjustbox}{width=.5\textwidth,center=\textwidth}
+\begin{adjustbox}{width=1\textwidth,center=\textwidth}
   \centering
   \includegraphics[scale=1]{images/new_features.png}
 \end{adjustbox}
@@ -187,6 +187,9 @@ It was considered to acquire personal air quality sensors to provide real-time h
 
 As mentioned in section (REF) there are currently many fixed sensors around Scotland. Which include different measures depending on the type of the sensor; however, the data sensed with this devices is not exposed through any public API from the Scottish government. But just as plain HTML information trough DEFRA websites (REF). One possibility as well is use any third party air quality data source; such as the breezometer air quality API\footnote{\url{https://breezometer.com/air-quality-api/overview/}} or the OpenAQ API\footnote{\url{https://openaq.org/#/}}. The first one is a private source of air quality data which bills for the queries to the service and may become not very cost-effective, the second is a public API source, but the number of sensors from each city in Scotland are limited compared to the official government sources. An example of this is the city of Glasgow, which from the official sources has 26 fixed sensors and from the public API only 4 are available. Because of this, to have a more accurate air quality source the data will be collected from the official sources and exposed to later query from the device. 
 
+Missing this: (REF)
+http://www.scottishairquality.co.uk/data/
+
 \subsection{Infrastructure as a service}
 IaaS or Infrastructure as a service is a cloud service that provides computing infrastructure on demand. The benefits of using such service as opposed to a traditional approaches are various. First, there is no need to buy, install and maintain a server on a fixed location, reducing the associated costs. Second, setting up an IaaS can be done within minutes, saving precious development time. The following options were considered for setting up an IaaS: 
 
@@ -198,9 +201,9 @@ IaaS or Infrastructure as a service is a cloud service that provides computing i
 
 Because of budget constraints, the most cost-effective solution was chosen, being Amazon's free tier the most generous allowing up to 12 month of free usage, as opposed to Microsoft's 30 days trial and Google's 60 days trial.
 
-\subsection{Back-end}
+\subsection{Back-end technological choices}
 The back end component of the system will perform 2 functions. Gather the required air quality data and insert it into a database; and provide service to the mobile application. For the  first function; the easiest way to do it is via any available web-crawling libraries, such as Jspider\footnote{\url{http://j-spider.sourceforge.net/}} for Java or Scrapy \footnote{\url{http://scrapy.org/}} for Python. Scrapy was chosen because it is a complete and stable framework that can handle the crawling operations in an easy way. 
-For the second component; there is a need for a more robust component which can handle multiple queries to the health advice presented in Android. 
+For the second component; there is a need for a more robust component which can handle multiple queries to the health advice presented in Android. Because of this, Java will be 
 
 \subsection{Schema-free database}
 There will be the need to store the air quality readings somewhere to later query from the device. For this, there is the option to use standard SQL databases or schema-free databases. Analyzing the data that will be stored in further detail; it will contain the readings gathered from each sensor in Scotland, and specific information such as their name, location and type of sensor, simple enough to be inserted without any relational schema . Moreover, the transactions between the devices and the database should be as fast as possible; without caring to much for instant reliability (because the sensors are updated at the soonest each hour). Taking into account these factors, it is more suitable the usage of a schema free database or NoSQL, specifically, it will be used a Dynamo NoSQL from the same Amazon Web Services infrastructure because it integrates easily with the already chosen IaaS. 
@@ -209,7 +212,7 @@ There will be the need to store the air quality readings somewhere to later quer
 The easiest way to communicate between the Android device and the services provided by amazon is by using the SDK provided by Amazon\footnote{https://aws.amazon.com/mobile/sdk/}, 
 
 \subsection{Overall design}
-The overall design of the infrastructure will be as shown in Figure \ref{fig:architecture}. The back-end and the database components will be running in amazon web services, and the android device will query with the amazon web services SDK to the dynamo database; and with HTTP requests to the advice service running on Java.
+The overall design of the infrastructure will be as shown in Figure \ref{fig:architecture}. The back-end and the database components will be running in amazon web services, and the android device will make use of the AWS SDK to make queries to the dynamo database; and REST services to query the advice server running on Java.
 
 \begin{figure}[H]
 \begin{adjustbox}{width=.8\textwidth,center=\textwidth}
@@ -291,6 +294,103 @@ As well as understanding how to achieve an smooth behavior within the applicatio
 
 According to Google: \begin{displayquote}Material design is  a visual language for our users that synthesizes the classic principles of good design with the innovation and possibility of technology and science \end{displayquote} 
 
-The material design framework helps with guidelines that addresses design issues to allow every application user to navigate, understand and  
+The material design framework helps with principles that address design issues to allow every application user to navigate, understand and use the designed user interface (UI) successfully. It also serves to unify the experience across different devices and screen sizes, so that users that are used to applications in general; will be able to understand in a natural way design cues of new applications. The following principles are adhered:   
+
+\begin{itemize}
+	\item Material: The material metaphor is based on paper and ink as in the real world, in three dimensions using lights and shadows. The intention is to close the gap between the perception of real world elements and digital elements. 
+    \item Graphics: The use of graphical elements such as typographies, icons, adequate colors and images make up a pleasant interface and give hierarchy and meaning. 
+    \item Motion: User actions that initiate motion and transform the state of the interface serve as playful cues that help to understand the flow of the interface as well as to provide continuity and feedback. 
+\end{itemize}
+
+
+\begin{figure}[H]
+\begin{adjustbox}{width=1\textwidth,center=\textwidth}
+  \centering
+  \includegraphics[scale=1]{images/material_google.png}
+\end{adjustbox}
+  \caption[Material design framework]{Material design framework \footnotemark}
+  \label{fig:android_material_design}
+\end{figure}
+\footnotetext{\url{https://material.google.com/}}
 
 \subsection{Targeted devices}
+As the android OS and APIs (Aplication Programming Interfaces) are updated over time; some applications built with later SDK's versions will not be compatible with earlier OS' versions. Because of this, it is important to define the earliest operative system that will be included in the development. For this, considerations such as the number of users that are still using old versions of android and new features that might be useful from newer SDK versions should be considered. For instance, the most used OS distribution nowadays is KitKat which makes use of an API level 19 as shown in Figure \ref{fig:android_platform_versions}, unfortunately, it does not offer native support for material elements, which are a strong positive for this development. A workaround for this problem is to include the Android support library\footnote{\url{https://developer.android.com/topic/libraries/support-library/index.html}} which will provide compatibility for features made available in newer versions of Android. The final targeted API is level 19 (KitKat) to use an up to date stable API and to include up to the 79\% of the Android users.  
+
+\begin{figure}[H]
+\begin{adjustbox}{width=1\textwidth,center=\textwidth}
+  \centering
+  \includegraphics[scale=1]{images/android_platform_versions.png}
+\end{adjustbox}
+  \caption[Android platform versions distribution]{Android platform versions distribution \footnotemark}
+  \label{fig:android_platform_versions}
+\end{figure}
+\footnotetext{\url{https://developer.android.com/about/dashboards/index.html}}
+
+\section{Back-end}
+More in detail, the back-end architecture will be composed as shown in Figure \ref{fig:architecture_back_end_detail}. A virtual machine will run Ubuntu Linux because it is a very stable and compatible version of Linux, there was also a possibility to use a custom amazon flavor of Linux, which was not viable due software compatibility issues. The back-end will host two main components to power the application, the data service and the advice service. 
+
+\begin{figure}[H]
+\begin{adjustbox}{width=1\textwidth,center=\textwidth}
+  \centering
+  \includegraphics[scale=1]{images/architecture_back_end_detail.png}
+\end{adjustbox}
+  \caption[Back-end architecture]{Back-end architecture detail}
+  \label{fig:architecture_back_end_detail}
+\end{figure}
+
+
+\subsection{Data Service}
+
+ The air data source is the air quality in Scotland website. Because the service displays the updated readings in HTML, a web crawler is needed to navigate the readings making use of XPATH selectors to extract the required data. Once extracted, they will be inserted in JSON format directly to the dynamo database.
+ 
+A daemon is a program that runs in the background autonomously, this daemon will call the web crawler every half hour to get the most up-to date readings from the air quality readings (They are updated at most each hour). 
+
+\subsection{Advice Service}
+The advice service will be responsible to provide health advice based on the CMEAP\cite{HealthProtectionAgencyfortheCommitteeontheMedicalEffectsofAirPollutants2011}. Before analyzing the techniques that can be considered to translate the advice from the CMEAP into a service, there are few things to notice. The document has different categories of advice based on the sensitivity and age of the persons, they are not simple data statements that can be easily used from a database, but more of simple logical statements. Also, it is likely that the health statements would need to be modified or expanded in the future. 
+
+When it comes to provide logic or 'intelligence' to a system in order for it to take choices (like the ones that are needed for the health advice) there are two general approaches that may be taken. Rule based systems and machine learning techniques. Rule based systems or expert systems are a good fit when all the options for the system are known beforehand; and when all the conditions can be easily written as \textit{if else statements}. On the other hand; machine learning techniques are useful when the datasets are fairly large and the rules have to be made at execution time. Because of this, the easiest way to provide the system the system the capability to give the required health advice given the user's personal circumstances is via an expert system.
+
+\subsection{REST services}
+(PEND)
+
+\section{First prototype}
+Following the interaction design methodology and the sketched application design the first prototype was drawn in order to accomplish the user requirements and to start defining how the final interface would look like. As mentioned, the application would be composed of three visualizations that will achieve the main functional requirements:
+
+\begin{itemize}
+	\item Visualize current air quality and provide health advice.
+    \item Visualize individual pollutants status and information about their sources and effects.
+    \item Visualize individual pollutants over time.
+\end{itemize}
+
+The first screen would serve as the entrance point of the application, gathering the user age and welcoming him to the application. 
+
+\begin{figure}[H]
+\begin{adjustbox}{width=1\textwidth,center=\textwidth}
+  \centering
+  \includegraphics[scale=1]{images/prototype1_screen1.png}
+\end{adjustbox}
+  \caption[First screen prototype]{First screen prototype}
+  \label{fig:android_material_design}
+\end{figure}
+
+Second screen
+
+\begin{figure}[H]
+\begin{adjustbox}{width=1\textwidth,center=\textwidth}
+  \centering
+  \includegraphics[scale=1]{images/prototype1_screen1.png}
+\end{adjustbox}
+  \caption[Second screen prototype]{Second screen prototype}
+  \label{fig:android_material_design}
+\end{figure}
+
+Third screen
+
+\begin{figure}[H]
+\begin{adjustbox}{width=1\textwidth,center=\textwidth}
+  \centering
+  \includegraphics[scale=1]{images/prototype1_screen3.png}
+\end{adjustbox}
+  \caption[Third screen prototype]{Third screen prototype}
+  \label{fig:android_material_design}
+\end{figure}

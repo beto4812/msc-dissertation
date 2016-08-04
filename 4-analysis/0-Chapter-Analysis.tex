@@ -227,16 +227,17 @@ The overall design of the infrastructure will be as shown in Figure \ref{fig:arc
 The Android application will be the visible interface for the final user. At this point it is pertinent to understand the design choices that can affect towards our main quality attributes: the design of the user interface, and the lower-level issues related to the management of the screen components. 
 
 \subsection{User interface}
-Three distinct screens will accomplish the functional requirements as shown in Figure. The first screen will be responsible for displaying a general overview and the personalized advice, the second screen will show individual pollutants; and the third screen will show individual pollutants over time. There will be as well another introductory screen to input the personal details needed for the application.
+Three distinct screens will accomplish the functional requirements as shown in Figure \ref{fig:chain_of_screens}. The first screen will be responsible for displaying a general overview and the personalized advice, the second screen will show individual pollutants; and the third screen will show individual pollutants over time. 
 
+One useful guideline at design level in order to connect the screen between each other is simplicity. Having many different screens that accomplish many different purposes could result in overwhelming the user, because of this, the screens will be accessible at every time using a tabbed menu and enabling gestures to navigate through them. That is, the screens will become active by selecting a tab, or by swiping between the screens. 
 
 \begin{figure}[H]
 \begin{adjustbox}{width=.45\textwidth,center=\textwidth}
   \centering
   \includegraphics[scale=1]{images/screenChain.png}
 \end{adjustbox}
-  \caption[Screens chain]{Screens chain}
-  \label{fig:architecture}
+  \caption[Chain of screens]{Chain of screens}
+  \label{fig:chain_of_screens}
 \end{figure}
 
 \subsection{Activities}
@@ -354,7 +355,7 @@ When it comes to provide logic or 'intelligence' to a system in order for it to 
 (PEND)
 
 \section{First prototype}
-Following the interaction design methodology and the sketched application design the first prototype was drawn in order to accomplish the user requirements and to start defining how the final interface would look like. As mentioned, the application would be composed of three visualizations that will achieve the main functional requirements:
+Following the sketched application design and the interaction design methodology, the first prototype was drawn in order to accomplish the user requirements and to start defining how the final interface would look like. As mentioned, the application would be composed of three final distinct visualizations that will achieve the main functional requirements:
 
 \begin{itemize}
 	\item Visualize current air quality and provide health advice.
@@ -362,29 +363,30 @@ Following the interaction design methodology and the sketched application design
     \item Visualize individual pollutants over time.
 \end{itemize}
 
-The first screen would serve as the entrance point of the application, gathering the user age and welcoming him to the application. 
+The first visualization would contain firsthand pertinent information that would accomplish different functions: letting know in an understandable, visual way the current air quality status and its components, providing information about the source of the air quality reading, showing the air quality advice given the user configuration and let the user configure the air quality advice in a playful way. We could think of this screen as a dashboard that will give the user the required basic information to use the rest of the application, in fact; the displayed by this screen is enough to get a full picture of what is going on without much detail.
 
+This screen is composed as shown in Figure \ref{fig:first_visualization}. It is visually divided into the top and bottom component. The top component is information about the sensor to provide the user confidence about the reading by means of a map, the hour it was last updated, and the name location of the sensor. The bottom component contains two bars: one for adjusting the sensitivity level, and the other one to show the air quality status followed by the advice and the pollutants that are taking part of the reading at the point it was taken. 
 \begin{figure}[H]
 \begin{adjustbox}{width=1\textwidth,center=\textwidth}
   \centering
   \includegraphics[scale=1]{images/prototype1_screen1.png}
 \end{adjustbox}
-  \caption[First screen prototype]{First screen prototype}
-  \label{fig:android_material_design}
+  \caption[Vsualization 1 first prototype]{Visualization 1 first prototype}
+  \label{fig:first_visualization}
 \end{figure}
 
-Second screen
+The second visualizations aims to provide an individual visual hint for each pollutant. The need for this visualization arises from the difficulty to observe at a pollutant level how the readings are without expert understanding of the air quality regulations. The overall idea is to show a list of the pollutants that are present at the moment with a visual cue to allow an immediate insight of the reading as well as containing the official measure and the measurement unit. Also, by clicking in each pollutant it will be possible to examine more specific information about the pollutant  
 
 \begin{figure}[H]
 \begin{adjustbox}{width=1\textwidth,center=\textwidth}
   \centering
-  \includegraphics[scale=1]{images/prototype1_screen1.png}
+  \includegraphics[scale=1]{images/prototype1_screen2.png}
 \end{adjustbox}
   \caption[Second screen prototype]{Second screen prototype}
   \label{fig:android_material_design}
 \end{figure}
 
-Third screen
+The final visualization will provide the full detail of how the readings were behaving through the day, or in a specific date. The need for this visualization arose from the need by sensitive persons to relate their symptoms to pollution spikes in order to gain knowledge about what might be affecting them at a pollutant level and enable them for better decision support based on this knowledge. For this purpose, a line graph is employed as is the most adequate tool to show readings over time. Also, the same pollutants that were taking part of the first and second visualizations will be consistent in this screen. The difference is that they will be touch-enabled to allow the user to select which  pollutant to visualize. At the top of the screen will be located a button to select pollution data from other dates. 
 
 \begin{figure}[H]
 \begin{adjustbox}{width=1\textwidth,center=\textwidth}

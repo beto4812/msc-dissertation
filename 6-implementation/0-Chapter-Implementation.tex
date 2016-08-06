@@ -1,6 +1,6 @@
 \chapter{Implementation}
 Before being able to develop a second working prototype that implements some of the functionality it is needed a fully functional back-end component. This chapter describes how this was was achieved with the elected design and technological choices going from the development of each back-end component to the development and implementation of a second and a third prototype.
-\section{Back-end}
+\section{Back-end implementation}
 
 \iffalse
 \subsection{Environment setup}
@@ -9,8 +9,9 @@ Following the design and technological choices from the previous chapter; the de
 
 
 \subsection{Database}
-General structure, indexed keys and how it provides almost one read access to the data. 
-(PEND)
+Dynamo was the chosen database as justified in the design chapter. It is a schema-free database that only requires a table name and a primary key. The primary key can be composed of up to two attributes, in which case the the first attribute defines the partition range and the second attribute defines the sorting over that partition. Dynamo is extremely efficient when used in the correct way. 
+
+Designing the table to contain the air quality readings is straightforward. The key is composed by the unique ID of the fixed sensor being the partition key, and the updated hour being the partition sort key. This provides the advantage that all the readings of an specific sensor can be retrieved together, and that they will be dispatched sorted, saving computing time on the client. Other general usage tables are also created to contain the coordinates of all sensors, and the COMEAP thresholds for each pollutant. These tables contain at most 20 items and are designed to be retrieved as a whole, so there is no need to sort them on a second attribute.
 
 \subsection{Web crawler and daemon}
 A web crawler is a service that automatically browses the web and extracts useful information to later insert it into a persistent storage. The air quality data needed to feed the application will be extracted from the Air Quality in Scotland website (REF) using scrappy as discussed in previous chapters. The way scrappy extracts structured data from a web-page is by browsing the HTML document with XPATH expressions. 
@@ -164,11 +165,9 @@ http://.../Advice/advice?age=?&sensitivity=?&airQualityIndex=?
 \par
 }
 
-\section{Second prototype}
-Now that the back-end is implemented to serve the application, it is possible to start the development of a second prototype. This prototype will follow the established on previous chapters but providing a real interactive experience.
-
+\section{Front-end implementation}
 \subsection{Access to air quality data}
-Once the services are available to query, the connection between the device and the air quality data hosted on dynamo has been implemented. As described before, amazon makes available an android library ready to connect to the database readings, it is included as a dependence within the android project. In order to handle and represent the database entries in android, Plain Old Java Objects \textit{POJO's} have been defined. They  are simple classes that describe the general structure and contents of a persisted data reading. An example is the following \textit{SensorReading}, which represents the raw \textit{JSON} database reading  and contains a list of the available pollutants, the date it was last updated, and the air quality index:
+Once the services are available to query, the connection between the device and the air quality data hosted on dynamo has been implemented. Amazon makes available an android library ready to connect to the database readings, it is included as a dependence within the android project. In order to handle and represent the database entries in android, Plain Old Java Objects \textit{POJO's} have been defined. They  are simple classes that describe the general structure and contents of a persisted data reading. An example is the following \textit{SensorReading}, which represents the raw \textit{JSON} database reading  and contains a list of the available pollutants, the date it was last updated, and the air quality index:
 
 {\centering
 \begin{spverbatim}
@@ -223,8 +222,7 @@ Once that the location permissions have been granted, the application retrieves 
 d={\sqrt {(\Delta x)^{2}+(\Delta y)^{2}}}={\sqrt {(x_{2}-x_{1})^{2}+(y_{2}-y_{1})^{2}}}.\,
 \end{equation}
 
-\subsection{Interface}
-\subsubsection{UI libraries and custom components}
+\subsection{Libraries and custom components}
 Many android UI components like buttons, bars or windows are already built and made available for public usage. Because crafting all the interface components from scratch is an extensive time-consuming task, most UI components were be outsourced. Just in very specific cases where no component was found suitable, it was developed from scratch. 
 The following public libraries were used to construct the UI:
 \begin{itemize}
@@ -235,6 +233,9 @@ The following public libraries were used to construct the UI:
   \item Round corner progress bar \footnote{\url{https://github.com/akexorcist/Android-RoundCornerProgressBar}}: A fancy fully configurable progress bar.
 \end{itemize}
 
+\section{Second Prototype}
+Now that the back-end is implemented to serve the application and that all the android components are in place, it is possible to describe a second prototype with some working capabilities, like retrieving and rendering real-data from the cloud services. This prototype will follow the established on previous chapters but providing a real interactive experience in order to get feedback from users and make improvements before releasing a third prototype. 
+
 \begin{figure}[H]
 \begin{adjustbox}{width=1.2\textwidth,center=\textwidth}
   \centering
@@ -244,30 +245,41 @@ The following public libraries were used to construct the UI:
   \label{fig:first_second_prototype}
 \end{figure}
 
-\subsubsection{First visualization}
-The interface of the first visualization is implemented using distinct XML layout elements. At this point it is important to provide some working capabilities. For instance, it is already retrieving the data from the back-end to populate the interface with the available information. At the top the information of the sensor is rendered employing text and a map. The map is retrieved by coordinates using the Google-maps API\footnote{\url{https://developers.google.com/maps/}}. In the center, there are two progress bars, one indicating the personalized sensitivity level and another indicating the current air quality index. The bottom components are including the personalized health advice, and the available pollutants at this time (The only pollutant available was particle matter). 
+\subsection{First visualization}
+At the top of the screen information of the air quality sensor is rendered employing text and a map. The map is retrieved by coordinates using the Google-maps API\footnote{\url{https://developers.google.com/maps/}}. In the center, there are two progress bars, one serves to adjust the personalized sensitivity level, and another one shows the current air quality index. The bottom components are including the personalized health advice, and the available pollutants at this time (In figure \ref{fig:first_second_prototype} the only pollutant available is particle matter). 
 
 At this iteration the color choices are starting to be defined, yet they are not perfect but provide a guidance on what is wanted. The color that is desired to be predominant is blue, because it evokes to fresh air. There are separators within the screen to indicate that the sections accomplishes different functions and to guide the user through its learning. Also, the font choices pretend to provide understandable text. 
 
-\subsubsection{Second visualization}
-This visualization as previously stated aims to give an understandable first insight of the current pollution at a particle level. At this iteration is considered to include all particles in 'spheres' which contain the reading rendered in a circular graph that change in color and diameter coverage according to the reading. The pollutants are grouped per category, in the Figure \ref{fig:first_second_prototype} are shown pollutants known as nitrogen oxides. Furthermore, images are included for the user to identify the current category and particle with ease.
+\subsection{Second visualization}
+This visualization as previously stated aims to give an understandable first insight of the current pollution at a particle level. At this iteration is considered to include all particles in 'spheres' which contain the reading rendered in a circular graph that change in color and arc coverage according to the reading. The pollutants are grouped per category, in the Figure \ref{fig:first_second_prototype} are shown pollutants known as nitrogen oxides. Furthermore, images are included for the user to identify the current category and particle with ease.
 
-\subsubsection{Third visualization}
-The third visualization includes the particles over defined periods of time using a line graph. The x axis represents the time while the y axis represents the reading. At this iteration it was considered to be able to overlap different pollutants and render them simultaneously on the same graph, this is done by selecting the pollutants on the bottom. Also, different colors are associated with the pollutants to be able to recognize them in the graph.
+To accomplish the second sub-requirement which is include further information about the pollutant when clicked, a second sub-screen was included. This one contains simple textual information about the pollutant sources and its associated health effects as shown in Figure \ref{fig:second_visualization_sub_screen}. 
+
+\begin{figure}[H]
+\begin{adjustbox}{width=.3\textwidth,center=\textwidth}
+  \centering
+  \includegraphics[scale=1]{images/second_visualization_sub_screen.png}
+\end{adjustbox}
+  \caption[Pollutant sources and effects screen]{Pollutant sources and effects screen}
+  \label{fig:second_visualization_sub_screen}
+\end{figure}
+
+\subsection{Third visualization}
+The third visualization includes the particles over defined periods of time using a line graph. The x axis represents the time while the y axis represents the reading. The user is able to select the data on specific dates and hours by using the available date and time buttons. At this iteration it was decided that the user would be able to overlap different pollutants and render them simultaneously on the same graph, this is done by selecting the pollutants on the bottom. Also, different colors are associated with the pollutants to be able to recognize them in the graph.
 
 \section{Third prototype}
-For the making of the third prototype, there were inner small evaluations with different users and stakeholders as mentioned in the Methodology section (REF). Their feedback was taken into account to discover what was failing with the second iteration and improve this final prototype. 
+For the making of a third prototype, there were inner small evaluations with different users and stakeholders as mentioned in the Methodology section (REF). Their feedback was taken into account to discover what was failing with the second iteration and improve this final prototype. 
 
 \begin{figure}[H]
 \begin{adjustbox}{width=1.2\textwidth,center=\textwidth}
   \centering
   \includegraphics[scale=1]{images/thirdPrototype.png}
 \end{adjustbox}
-  \caption[Second prototype]{Third prototype. From left to right: first, second and third visualization.}
+  \caption[Second visualization sub-screen]{Second visualization sub-screen.}
   \label{fig:third_prototype}
 \end{figure}
 
-\subsubsection{First visualization}
+\subsection{First visualization}
 The findings from evaluating the second version of this screen were that the overall usability of the interface was not high nor low. People could use the interface after few attempts by playing around, but they were sometimes confused about what the elements were doing, and how to use them. Because of this the interface was improved to achieve a better learn-ability through changing the arrangement of the elements, the colors and adding other indicative visual and textual elements.
 The improvements with respect the past iteration were the following:
 \begin{itemize}
@@ -279,25 +291,40 @@ The improvements with respect the past iteration were the following:
     \item Text fonts were richly improved, using the Google recommended fonts when appropriate:  Open-Sans and Robotto.
 \end{itemize}
 
-\subsubsection{Second visualization}
-The second iteration of this screen was not very hard to use overall, the users were able to navigate through this interface with ease. The feedback showed that there were too many images leading to distraction. 
-Improvements with respect the past iteration:
+\subsection{Second visualization}
+The second iteration of this screen was not very hard to use overall, the users were able to navigate through this interface with ease. On the other hand, feedback also showed that there were too many images leading to distraction. 
+
+The improvements with respect the past iteration were the following:
 \begin{itemize}
 	\item The images on the center of each pollutant were confusing rather than accomplishing an associative function. They were removed.
     \item Apart from the associative colors in the circular graph (green, yellow, red) a textual tag was included (good, regular, bad).
     \item The titles of the pollutants were expanded, as they were not very distinguishable. 
-    \item An inner circle explaining the thresholds for each pollutant through traffic light colors was added to the circular graph. 
+    \item An inner smaller circle explaining the thresholds for each pollutant through traffic light colors was added to the circular graph. 
     \item Text fonts were richly improved, using the Google recommended fonts when appropriate:  Open-Sans and Robotto.
 	
 \end{itemize}
 
-\subsubsection{Third visualization}
+\subsection{Third visualization}
+From evaluating this screen, it was encountered that users were finding hard to manipulate more than one pollutant at a time. Also, the specific time selectors were very cumber-stone requiring the user to perform many steps to achieve the rendering of the interface. 
+The improvements with respect the past iteration were the following:
+\begin{itemize}
+	\item The colors were changed avoiding colors similar to the already used ones in in the semaphore scale to elude the user to associate the pollutants state with them. They were also tied with the colors of the same pollutants in the first visualization to ease the learning process.
+	\item The number of possible selected pollutants was limited to one. As they were hard to distinguish together in the same line graph. 
+    \item The selector by time was removed, leaving the date selection alone. The reason for this is that the readings outside the threshold of a day were very hard to represent and read and it was cumber-stone to select the specific time ranges. 
+    \item An indicative overlay was added behind the line graph. Showing the acceptance level at which the current reading was located in the semaphore color scale. 
 
-\section{Testing}
-Tested through the Amazon Mobile Hub
-
-Database performance, gathered more than 50,000 readings from sensor spread in all Scotland. The entire dataset weights less than 22 megabytes. The response time is extremely quick (in miliseconds). The scalability is automatic. 
-
+\end{itemize}
 
 \section{Deployment}
-The application was uploaded to the Android Market a
+At this point the development of the third prototype was exhausted. The back-end component has been working nonstop since the 15th of June and gathered more than 50,000 readings containing more than 200,000 pollution readings from sensors spread all over Scotland. There is an added value on providing the application for public download and usage and it enables further testing and feedback that goes beyond a couple of users.
+
+\begin{figure}[H]
+\begin{adjustbox}{width=.6\textwidth,center=\textwidth}
+  \centering
+  \includegraphics[scale=1]{images/play_store.png}
+\end{adjustbox}
+  \caption[Deployment on Google Play Store]{Deployment on Google Play Store.\footnotemark}
+  \label{fig:deployment_play_store}
+\end{figure}
+\footnotetext{\url{https://play.google.com/store/apps/details?id=com.beto4812.airqueue&hl=en_GB}}
+

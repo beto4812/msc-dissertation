@@ -185,7 +185,7 @@ It is possible that the development could take a hybrid or a native approach, as
 \subsection{Air quality data source}
 It was considered to acquire personal air quality sensors to provide real-time high resolution data to the system; unfortunately, such devices are still not very feasible as they are costly and become disposable over time due its loose of accuracy. One example is the Libelium gases pro sensor, which costs around \euro{}2000 and has an approximate lifetime of 12 months\footnote{\url{http://www.libelium.com/calibrated-air-quality-gas-dust-particle-matter-pm10-smart-cities/}}. 
 
-As mentioned in section (REF) there are currently many fixed sensors around Scotland. Which include different measures depending on the type of the sensor; however, the data sensed with this devices is not exposed through any public API from the Scottish government. But just as plain HTML information trough DEFRA websites (REF). One possibility as well is use any third party air quality data source; such as the breezometer air quality API\footnote{\url{https://breezometer.com/air-quality-api/overview/}} or the OpenAQ API\footnote{\url{https://openaq.org/#/}}. The first one is a private source of air quality data which bills for the queries to the service and may become not very cost-effective, the second is a public API source, but the number of sensors from each city in Scotland are limited compared to the official government sources. An example of this is the city of Glasgow, which from the official sources has 26 fixed sensors and from the public API only 4 are available. Because of this, to have a more accurate air quality source the data will be collected from the official sources and exposed to later query from the device. 
+As mentioned in section (REF) there are currently many fixed sensors around Scotland which include different measures depending on the type of the sensor. However, the data sensed with this devices is not exposed through any public API from the Scottish government. But just as plain HTML information trough DEFRA websites (REF). One possibility as well is use any third party air quality data source; such as the breezometer air quality API\footnote{\url{https://breezometer.com/air-quality-api/overview/}} or the OpenAQ API\footnote{\url{https://openaq.org/#/}}. The first one is a private source of air quality data which bills for the queries to the service and may become not very cost-effective, the second is a public API source, but the number of sensors from each city in Scotland are limited compared to the official government sources. An example of this is the city of Glasgow, which from the official sources has 26 fixed sensors and from the public API only 4 are available. Because of this, to have a more accurate air quality source the data will be collected from the official sources and exposed to later query from the device. 
 
 Missing this: (REF)
 http://www.scottishairquality.co.uk/data/
@@ -203,13 +203,13 @@ Because of budget constraints, the most cost-effective solution was chosen, bein
 
 \subsection{Back-end technological choices}
 The back end component of the system will perform 2 functions. Gather the required air quality data and insert it into a database; and provide service to the mobile application. For the  first function; the easiest way to do it is via any available web-crawling libraries, such as Jspider\footnote{\url{http://j-spider.sourceforge.net/}} for Java or Scrapy \footnote{\url{http://scrapy.org/}} for Python. Scrapy was chosen because it is a complete and stable framework that can handle the crawling operations in an easy way. 
-For the second component; there is a need for a more robust component which can handle multiple queries to the health advice presented in Android. Because of this, Java will be 
+For the second component; there is a need for a more robust component which can handle multiple queries to the health advice presented in Android. Because of this, Java will be (PEND)
 
 \subsection{Schema-free database}
 There will be the need to store the air quality readings somewhere to later query from the device. For this, there is the option to use standard SQL databases or schema-free databases. Analyzing the data that will be stored in further detail; it will contain the readings gathered from each sensor in Scotland, and specific information such as their name, location and type of sensor, simple enough to be inserted without any relational schema . Moreover, the transactions between the devices and the database should be as fast as possible; without caring to much for instant reliability (because the sensors are updated at the soonest each hour). Taking into account these factors, it is more suitable the usage of a schema free database or NoSQL, specifically, it will be used a Dynamo NoSQL from the same Amazon Web Services infrastructure because it integrates easily with the already chosen IaaS. 
 
 \subsection{Amazon web services SDK}
-The easiest way to communicate between the Android device and the services provided by amazon is by using the SDK provided by Amazon\footnote{https://aws.amazon.com/mobile/sdk/}, 
+The easiest way to communicate between the Android device and the services provided by amazon is by using the SDK provided by Amazon\footnote{https://aws.amazon.com/mobile/sdk/}, (PEND)
 
 \subsection{Overall design}
 The overall design of the infrastructure will be as shown in Figure \ref{fig:architecture}. The back-end and the database components will be running in amazon web services, and the android device will make use of the AWS SDK to make queries to the dynamo database; and REST services to query the advice server running on Java.
@@ -229,7 +229,7 @@ The Android application will be the visible interface for the final user. At thi
 \subsection{User interface}
 Three distinct screens will accomplish the functional requirements as shown in Figure \ref{fig:chain_of_screens}. The first screen will be responsible for displaying a general overview and the personalized advice, the second screen will show individual pollutants; and the third screen will show individual pollutants over time. 
 
-One useful guideline at design level in order to connect the screen between each other is simplicity. Having many different screens that accomplish many different purposes could result in overwhelming the user, because of this, the screens will be accessible at every time using a tabbed menu and enabling gestures to navigate through them. That is, the screens will become active by selecting a tab, or by swiping between the screens. 
+One useful guideline at design level in order to connect the screen between each other is simplicity. Having many different screens that accomplish many different purposes could result in overwhelming the user, because of this, the screens will be accessible at every time using a tabbed menu and enabling gestures to navigate through them. That is, the screens will become active by selecting a tab, or by swiping between them.  (PEND: put here the icon maybe)
 
 \begin{figure}[H]
 \begin{adjustbox}{width=.45\textwidth,center=\textwidth}
@@ -315,7 +315,7 @@ The material design framework helps with principles that address design issues t
 \footnotetext{\url{https://material.google.com/}}
 
 \subsection{Targeted devices}
-As the android OS and APIs (Aplication Programming Interfaces) are updated over time; some applications built with later SDK's versions will not be compatible with earlier OS' versions. Because of this, it is important to define the earliest operative system that will be included in the development. For this, considerations such as the number of users that are still using old versions of android and new features that might be useful from newer SDK versions should be considered. For instance, the most used OS distribution nowadays is KitKat which makes use of an API level 19 as shown in Figure \ref{fig:android_platform_versions}, unfortunately, it does not offer native support for material elements, which are a strong positive for this development. A workaround for this problem is to include the Android support library\footnote{\url{https://developer.android.com/topic/libraries/support-library/index.html}} which will provide compatibility for features made available in newer versions of Android. The final targeted API is level 19 (KitKat) to use an up to date stable API and to include up to the 79\% of the Android users.  
+As the android OS and APIs (Aplication Programming Interfaces) are updated over time; some applications built with later SDK's versions will not be compatible with earlier OS' versions. Because of this, it is important to define the earliest operative system that will be included in the development. For this, considerations such as the number of users that are still using old versions of android and new features that might be useful from newer SDK versions should be studied. For instance, the most used OS distribution nowadays is KitKat which makes use of an API level 19 as shown in Figure \ref{fig:android_platform_versions}, unfortunately, it does not offer native support for material elements, which are a strong positive for this development. A workaround for this problem is to include the Android support library\footnote{\url{https://developer.android.com/topic/libraries/support-library/index.html}} which will provide compatibility for features made available in newer versions of Android. The final targeted API is level 19 (KitKat) to use an up to date stable API and to include up to the 79\% of the Android users.  
 
 \begin{figure}[H]
 \begin{adjustbox}{width=1\textwidth,center=\textwidth}
@@ -363,36 +363,27 @@ Following the sketched application design and the interaction design methodology
     \item Visualize individual pollutants over time.
 \end{itemize}
 
+
+\begin{figure}[H]
+\begin{adjustbox}{width=1.2\textwidth,center=\textwidth}
+  \centering
+  \includegraphics[scale=1]{images/firstPrototype.png}
+\end{adjustbox}
+  \caption[Frist prototype]{First prototype}
+  \label{fig:first_visualization_first_prototype}
+\end{figure}
+
+
+\subsection{First visualization}
+
 The first visualization would contain firsthand pertinent information that would accomplish different functions: letting know in an understandable, visual way the current air quality status and its components, providing information about the source of the air quality reading, showing the air quality advice given the user configuration and let the user configure the air quality advice in a playful way. We could think of this screen as a dashboard that will give the user the required basic information to use the rest of the application, in fact; the displayed by this screen is enough to get a full picture of what is going on without much detail.
 
-This screen is composed as shown in Figure \ref{fig:first_visualization}. It is visually divided into the top and bottom component. The top component is information about the sensor to provide the user confidence about the reading by means of a map, the hour it was last updated, and the name location of the sensor. The bottom component contains two bars: one for adjusting the sensitivity level, and the other one to show the air quality status followed by the advice and the pollutants that are taking part of the reading at the point it was taken. 
-\begin{figure}[H]
-\begin{adjustbox}{width=1\textwidth,center=\textwidth}
-  \centering
-  \includegraphics[scale=1]{images/prototype1_screen1.png}
-\end{adjustbox}
-  \caption[Vsualization 1 first prototype]{Visualization 1 first prototype}
-  \label{fig:first_visualization}
-\end{figure}
+This screen is composed as shown in Figure \ref{fig:first_visualization_first_prototype}. It is visually divided into the top and bottom component. The top component is information about the sensor to provide the user confidence about the reading by means of a map, the hour it was last updated, and the name location of the sensor. The bottom component contains two bars: one for adjusting the sensitivity level, and the other one to show the air quality status followed by the advice and the pollutants that are taking part of the reading at the point it was taken. 
+
+\subsection{Second visualization}
 
 The second visualizations aims to provide an individual visual hint for each pollutant. The need for this visualization arises from the difficulty to observe at a pollutant level how the readings are without expert understanding of the air quality regulations. The overall idea is to show a list of the pollutants that are present at the moment with a visual cue to allow an immediate insight of the reading as well as containing the official measure and the measurement unit. Also, by clicking in each pollutant it will be possible to examine more specific information about the pollutant  
 
-\begin{figure}[H]
-\begin{adjustbox}{width=1\textwidth,center=\textwidth}
-  \centering
-  \includegraphics[scale=1]{images/prototype1_screen2.png}
-\end{adjustbox}
-  \caption[Second screen prototype]{Second screen prototype}
-  \label{fig:android_material_design}
-\end{figure}
+\subsection{Third visualization}
 
 The final visualization will provide the full detail of how the readings were behaving through the day, or in a specific date. The need for this visualization arose from the need by sensitive persons to relate their symptoms to pollution spikes in order to gain knowledge about what might be affecting them at a pollutant level and enable them for better decision support based on this knowledge. For this purpose, a line graph is employed as is the most adequate tool to show readings over time. Also, the same pollutants that were taking part of the first and second visualizations will be consistent in this screen. The difference is that they will be touch-enabled to allow the user to select which  pollutant to visualize. At the top of the screen will be located a button to select pollution data from other dates. 
-
-\begin{figure}[H]
-\begin{adjustbox}{width=1\textwidth,center=\textwidth}
-  \centering
-  \includegraphics[scale=1]{images/prototype1_screen3.png}
-\end{adjustbox}
-  \caption[Third screen prototype]{Third screen prototype}
-  \label{fig:android_material_design}
-\end{figure}

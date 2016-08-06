@@ -7,8 +7,13 @@ Before being able to develop a second working prototype that implements some of 
 Following the design and technological choices from the previous chapter; the dedicated hardware components were launched from Amazon Web Services. 
 \fi
 
-\subsection{Web crawler}
-A web crawler is a service that automatically browses the web and extracts useful information to later insert it into a persistent storage. The air quality data needed to feed the application will be extracted from the Air Quality in Scotland website (REF) as discussed in previous chapters. Scrappy was the selected technology for this purpose. The way scrappy extracts structured data from a web-page is by browsing the HTML document with XPATH expressions. 
+
+\subsection{Database}
+General structure, indexed keys and how it provides almost one read access to the data. 
+(PEND)
+
+\subsection{Web crawler and daemon}
+A web crawler is a service that automatically browses the web and extracts useful information to later insert it into a persistent storage. The air quality data needed to feed the application will be extracted from the Air Quality in Scotland website (REF) using scrappy as discussed in previous chapters. The way scrappy extracts structured data from a web-page is by browsing the HTML document with XPATH expressions. 
 
 \begin{figure}[H]
 \begin{adjustbox}{width=.5\textwidth,center=\textwidth}
@@ -22,14 +27,14 @@ A web crawler is a service that automatically browses the web and extracts usefu
 
 The website data source contains many sensors from different authorities in Scotland as shown in Figure \ref{fig:pollution_sensors_list}, they aggregate the data and display a list of the available sensors. The first thing the crawler would need to do is to extract the links to navigate through all the available sensors. The rendered sensor list table looks like the code bellow in plain HTML. It is noticeable that the XPATH selector needs to go through the table to reach the \textit{href} attribute in order to access the data for that specific sensor. 
 
-To select the \textit{href} attribute: 
+To select the \textit{href} attribute: \bigskip
 
 {\centering
 \begin{BVerbatim}
 //tr/td[1]/a@href
 \end{BVerbatim}
 \par
-}
+}\bigskip
 
 The output of the XPATH selector is highlighted in red: 
 
@@ -48,7 +53,7 @@ The output of the XPATH selector is highlighted in red:
 </table>
 \end{Verbatim}
 
-Once that the URL containing the data is extracted, scrappy executes another request to select the interesting data for each sensor. The readings are rendered through a table which contains the pollutant, the band, the concentration and the update period as shown in 
+Once that the URL containing the data is extracted, scrappy executes another request to select the interesting data for each sensor. The readings are rendered through a table which contains the pollutant, the band, the concentration and the update period as shown in Figure \ref{fig:pollution_site readings}
 
 \begin{figure}[H]
 \begin{adjustbox}{width=.5\textwidth,center=\textwidth}
@@ -60,40 +65,239 @@ Once that the URL containing the data is extracted, scrappy executes another req
 \end{figure}
 \footnotetext{\url{http://www.scottishairquality.co.uk/latest/site-info?site_id=ED3}}
 
+To extract the pollutants information contained in the the table all the \textit{td} elements are selected: 
 
-This time, all the information contained in a \textit{td} tag is selected. 
+{\centering
+\begin{BVerbatim}
+td[1]
+\end{BVerbatim}
+\par
+}\bigskip
+
+The output of the XPATH selector is highlighted in red: 
 
 \begin{Verbatim}[fontsize=\small,commandchars=\\\(\)]
 <table>
   <tbody>
     <tr>
-      <td>Ozone (O<sub>3</sub>)</td>
-      <td><span class="band index2">LOW (2)</span></td>
-      <td>39 ugm<sup>-3</sup></td>
-      <td>8 Hour mean</td>
+      <td>(\color(red)Ozone (O<sub>3</sub>))</td>
+      <td>(\color(red)LOW (2))</td>
+      <td>(\color(red)39 ugm<sup>-3)</sup></td>
+      <td>(\color(red)8 Hour mean)</td>
     </tr>
   <tr>
-    <td>PM<sub>10</sub> particulate matter (Hourly measured)</td>
-    <td><span class="band index1">LOW (1)</span></td>
-    <td>11 ugm<sup>-3</sup> (TEOM FDMS)</td>
-    <td>24 Hour mean</td>
+    <td>(\color(red)PM<sub>10</sub> particulate matter (Hourly measured))</td>
+    <td>(\color(red)LOW (1))</td>
+    <td>(\color(red)11 ugm<sup>-3</sup> (TEOM FDMS))</td>
+    <td>(\color(red)24 Hour mean)</td>
   </tbody>
 </table>                
 \end{Verbatim}
 
+Following the same principle the remaining meta-data such as the reading time-stamp and the sensor details are extracted. Still, the data data is not in the optimal format yet, some readings contain embedded HTML tags that need to be cleaned before any insertion in the database. Fortunately, scrappy provides a pipeline process before exporting the data into the desired format. The cleaning process is straightforward, by cropping the undesired tags with python strings processing. 
+
+Once the data is ready to be exported, it is translated into a python \textit{dict} and inserted right-away in the dynamo table: \bigskip
+
+{\centering
+\begin{BVerbatim}
+        table.put_item(Item = dict(sensor_reading))
+\end{BVerbatim}
+\par
+}\bigskip
 
 
-\subsection{Database}
+The described above python script will be executed constantly to keep the data as up to date as possible. Unix systems have a built-in daemon utility that can be used to execute the script directly called cron. This service reads a crontab file containing the information of the all the scheduled tasks. In order to add an entry to the crontab file and indicate that the the crawler script will be executed every 30 minutes, the following command is executed: \bigskip
+
+{\centering
+\begin{BVerbatim}
+        */30 * * * * python crawler.py
+\end{BVerbatim}
+\par
+}
+
 \subsection{Advice service}
+The advice service will respond the requests from the android device to provide the personalized health advice as discussed in previous chapters. It is composed of two components: an expert system and a java servlet to expose the service through HTTP GET requests. 
+
+The first task is to translate the advice offered by the CMEAP into rules to form a knowledge base. This knowledge base will live in the memory of the java web container and whenever it receives new queries it will infer the advice form the asserted facts. The facts representing the advice are like \textit{if-else} statements that focus on three conditions: the pollution level index, the sensitivity of the person and the age of the person. 
+
+The Jess engine allows to define templates, which are like java classes that describe how a statement should look like when asserted. The actual values contained by the fact are named slots. These templates are useful to describe the conditions that are needed to assert an advice. For instance, the templates \textit{pollutionLevel} and \textit{person} can be defined in the following way: 
+
+{\centering
+\begin{spverbatim}
+(deftemplate pollutionLevel
+    (slot value)
+)
+
+(deftemplate person
+    (slot age)
+    (slot sensitivity); The possible values are 1 and 2.
+)
+\end{spverbatim}
+\par
+}
+
+The logic in Jess is modeled with rules. They define the conditions or facts that should be fulfilled in order to assert a new fact. The following rule is an example that models the CMEAP advice given to adult sensitive individuals when the air quality index is in a level between 4 and 6 points. If all these conditions are fulfilled then it is possible to assert the advice: "Consider reducing strenuous physical activity, particularly outdoors". 
+
+{\centering
+\begin{spverbatim}
+(defrule consider_reducing_strenuous_activity_sensitive_4_6
+    ?per <- (person {sensitivity >= 2})
+    ?per <- (person {age >= 65})
+    ?pol <- (pollutionLevel {value >= 4 && value <= 6})
+    =>
+    (assert
+        (advice (text "Consider reducing strenuous physical activity, particularly outdoors")))
+)
+\end{spverbatim}
+\par
+}
+
+The rule engine is initialized in the context of the java enterprise web container and the facts are loaded from a \textit{facts.clp} file to ease the way they can be later modified. 
+
+To grant android access to the advice assertions, the inference engine was exposed in a public domain on the amazon infrastructure. The running servlet handles all incoming \textit{get} requests asking for the advice service. The client has to append the age, the sensitivity and the pollution level variables to the \textit{http get} request in the form of query parameters as in the following example: \bigskip
 
 
-\section{Front end implementation}
-\subsection{User interface}
-\subsection{Visualizations}
-\subsection{Demo mode}
+{\centering
+\begin{BVerbatim}
+http://.../Advice/advice?age=?&sensitivity=?&airQualityIndex=?
+\end{BVerbatim}
+\par
+}
+
+\section{Second prototype}
+Now that the back-end is implemented to serve the application, it is possible to start the development of a second prototype. This prototype will follow the established on previous chapters but providing a real interactive experience.
+
+\subsection{Access to air quality data}
+Once the services are available to query, the connection between the device and the air quality data hosted on dynamo has been implemented. As described before, amazon makes available an android library ready to connect to the database readings, it is included as a dependence within the android project. In order to handle and represent the database entries in android, Plain Old Java Objects \textit{POJO's} have been defined. They  are simple classes that describe the general structure and contents of a persisted data reading. An example is the following \textit{SensorReading}, which represents the raw \textit{JSON} database reading  and contains a list of the available pollutants, the date it was last updated, and the air quality index:
+
+{\centering
+\begin{spverbatim}
+
+@DynamoDBTable(tableName = "airquality_readings")
+public class SensorReading {
+
+    private HashMap<String, Pollutant> pollutants = new HashMap<>();
+    private String lastUpdated;
+    private String airQualityIndex;
+}
+\end{spverbatim}
+\par
+}
+
+This eases the way the data is queried from the device, allowing to define a \textit{DatabaseManager} to retrieve the readings in the following way: 
+
+{\centering
+\begin{spverbatim}
+public List<SensorReading> getReadingsBySourceID(String sourceID, String since, String to) {
+
+  Condition rangeKeyCondition = new Condition().
+    withComparisonOperator(ComparisonOperator.BETWEEN.toString()).
+    withAttributeValueList(new AttributeValue().
+    withS(since), new AttributeValue().withS(to));
+
+  DynamoDBQueryExpression<SensorReading> queryExpression = new
+    DynamoDBQueryExpression().
+    withHashKeyValues(sourceID).
+    withRangeKeyCondition("lastUpdated", rangeKeyCondition);
+  
+return dynamoDBMapper.query(SensorReading.class, queryExpression);
+}
+\end{spverbatim}
+\par
+}
+
+\subsection{Localizing the closest sensor reading}
+Because many sensors may be available to query, the closest sensor should be identified and displayed. To provide localization features to the application it should inform that it has the intention to use such features before installed. To do so, the permission is added to the project \textit{manifest.xml} in the following way: \bigskip
+
+{\centering
+\begin{BVerbatim}
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+\end{BVerbatim}
+\par
+}
+\bigskip
+
+Once that the location permissions have been granted, the application retrieves the last sensed location by the device and a list including all available sensors and their locations from the dynamo database. The task is to find out the closest sensor given the full coordinate list and the current location, which is also in longitude-latitude format. The closest sensor is chosen by calculating the distance between all options using the distance between two points formula: 
+
+\begin{equation}
+d={\sqrt {(\Delta x)^{2}+(\Delta y)^{2}}}={\sqrt {(x_{2}-x_{1})^{2}+(y_{2}-y_{1})^{2}}}.\,
+\end{equation}
+
+\subsection{Interface}
+\subsubsection{UI libraries and custom components}
+Many android UI components like buttons, bars or windows are already built and made available for public usage. Because crafting all the interface components from scratch is an extensive time-consuming task, most UI components were be outsourced. Just in very specific cases where no component was found suitable, it was developed from scratch. 
+The following public libraries were used to construct the UI:
+\begin{itemize}
+    \item Deco view charting \footnote{\url{https://github.com/bmarrdev/android-DecoView-charting}}: Provides components to create animated circular charts.
+    \item MPAndroidChart \footnote{\url{https://github.com/PhilJay/MPAndroidChart}}: Provides components to create many different types of charts: lines bar and pie charts among others.
+    \item Android simple tooltip \footnote{\url{https://github.com/douglasjunior/android-simple-tooltip}}: Provides a tool-tip component.
+	\item Material date-time picker \footnote{\url{https://github.com/wdullaer/MaterialDateTimePicker}}: A built-in calendar to select time and date.
+  \item Round corner progress bar \footnote{\url{https://github.com/akexorcist/Android-RoundCornerProgressBar}}: A fancy fully configurable progress bar.
+\end{itemize}
+
+\begin{figure}[H]
+\begin{adjustbox}{width=1.2\textwidth,center=\textwidth}
+  \centering
+  \includegraphics[scale=1]{images/secondPrototype.png}
+\end{adjustbox}
+  \caption[Second prototype]{Second prototype. From left to right: first, second and third visualization.}
+  \label{fig:first_second_prototype}
+\end{figure}
+
+\subsubsection{First visualization}
+The interface of the first visualization is implemented using distinct XML layout elements. At this point it is important to provide some working capabilities. For instance, it is already retrieving the data from the back-end to populate the interface with the available information. At the top the information of the sensor is rendered employing text and a map. The map is retrieved by coordinates using the Google-maps API\footnote{\url{https://developers.google.com/maps/}}. In the center, there are two progress bars, one indicating the personalized sensitivity level and another indicating the current air quality index. The bottom components are including the personalized health advice, and the available pollutants at this time (The only pollutant available was particle matter). 
+
+At this iteration the color choices are starting to be defined, yet they are not perfect but provide a guidance on what is wanted. The color that is desired to be predominant is blue, because it evokes to fresh air. There are separators within the screen to indicate that the sections accomplishes different functions and to guide the user through its learning. Also, the font choices pretend to provide understandable text. 
+
+\subsubsection{Second visualization}
+This visualization as previously stated aims to give an understandable first insight of the current pollution at a particle level. At this iteration is considered to include all particles in 'spheres' which contain the reading rendered in a circular graph that change in color and diameter coverage according to the reading. The pollutants are grouped per category, in the Figure \ref{fig:first_second_prototype} are shown pollutants known as nitrogen oxides. Furthermore, images are included for the user to identify the current category and particle with ease.
+
+\subsubsection{Third visualization}
+The third visualization includes the particles over defined periods of time using a line graph. The x axis represents the time while the y axis represents the reading. At this iteration it was considered to be able to overlap different pollutants and render them simultaneously on the same graph, this is done by selecting the pollutants on the bottom. Also, different colors are associated with the pollutants to be able to recognize them in the graph.
+
+\section{Third prototype}
+For the making of the third prototype, there were inner small evaluations with different users and stakeholders as mentioned in the Methodology section (REF). Their feedback was taken into account to discover what was failing with the second iteration and improve this final prototype. 
+
+\begin{figure}[H]
+\begin{adjustbox}{width=1.2\textwidth,center=\textwidth}
+  \centering
+  \includegraphics[scale=1]{images/thirdPrototype.png}
+\end{adjustbox}
+  \caption[Second prototype]{Third prototype. From left to right: first, second and third visualization.}
+  \label{fig:third_prototype}
+\end{figure}
+
+\subsubsection{First visualization}
+The findings from evaluating the second version of this screen were that the overall usability of the interface was not high nor low. People could use the interface after few attempts by playing around, but they were sometimes confused about what the elements were doing, and how to use them. Because of this the interface was improved to achieve a better learn-ability through changing the arrangement of the elements, the colors and adding other indicative visual and textual elements.
+The improvements with respect the past iteration were the following:
+\begin{itemize}
+	\item  The way the interface is sectioned was changed. Having three sections was leading for confusion rather than for guidance.
+    \item Background colors were changed to allow the components to be more distinguishable employing one main color in the top, and one gradient in the bottom.
+    \item  The three three colors employed in this screen blend together better to avoid distracting the user.
+    \item Indicative icons were added to provide usability. It is now easier to learn how to navigate through the interface.
+    \item Info buttons with tool-tips were added. They give further information about what is happening with a particular screen component. For instance they say how to adjust the personalized sensitivity level, or where does the air quality status comes from. This to provide confidence. 
+    \item Text fonts were richly improved, using the Google recommended fonts when appropriate:  Open-Sans and Robotto.
+\end{itemize}
+
+\subsubsection{Second visualization}
+The second iteration of this screen was not very hard to use overall, the users were able to navigate through this interface with ease. The feedback showed that there were too many images leading to distraction. 
+Improvements with respect the past iteration:
+\begin{itemize}
+	\item The images on the center of each pollutant were confusing rather than accomplishing an associative function. They were removed.
+    \item Apart from the associative colors in the circular graph (green, yellow, red) a textual tag was included (good, regular, bad).
+    \item The titles of the pollutants were expanded, as they were not very distinguishable. 
+    \item An inner circle explaining the thresholds for each pollutant through traffic light colors was added to the circular graph. 
+    \item Text fonts were richly improved, using the Google recommended fonts when appropriate:  Open-Sans and Robotto.
+	
+\end{itemize}
+
+\subsubsection{Third visualization}
 
 \section{Testing}
 Tested through the Amazon Mobile Hub
+
+Database performance, gathered more than 50,000 readings from sensor spread in all Scotland. The entire dataset weights less than 22 megabytes. The response time is extremely quick (in miliseconds). The scalability is automatic. 
+
 
 \section{Deployment}
 The application was uploaded to the Android Market a

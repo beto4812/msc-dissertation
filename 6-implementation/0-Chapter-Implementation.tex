@@ -167,7 +167,7 @@ http://.../Advice/advice?age=?&sensitivity=?&airQualityIndex=?
 
 \section{Front-end implementation}
 \subsection{Access to air quality data}
-Once the services are available to query, the connection between the device and the air quality data hosted on dynamo has been implemented. Amazon makes available an android library ready to connect to the database readings, it is included as a dependence within the android project. In order to handle and represent the database entries in android, Plain Old Java Objects \textit{POJO's} have been defined. They  are simple classes that describe the general structure and contents of a persisted data reading. An example is the following \textit{SensorReading}, which represents the raw \textit{JSON} database reading  and contains a list of the available pollutants, the date it was last updated, and the air quality index:
+Once the services are available to query, the connection between the device and the air quality data hosted on dynamo has been implemented. Amazon makes available an android library ready to connect to the database readings\footnote{\url{https://aws.amazon.com/mobile/sdk/}}, it is included as a dependence within the android project. In order to handle and represent the database entries in android, Plain Old Java Objects \textit{POJO's} have been defined. They  are simple classes that describe the general structure and contents of a persisted data reading. An example is the following \textit{SensorReading}, which represents the raw \textit{JSON} database reading  and contains a list of the available pollutants, the date it was last updated, and the air quality index:
 
 {\centering
 \begin{spverbatim}
@@ -319,7 +319,7 @@ The improvements with respect the past iteration were the following:
 At this point the development of the third prototype was exhausted. The back-end component has been working nonstop since the 15th of June and gathered more than 50,000 readings containing more than 200,000 pollution readings from sensors spread all over Scotland. There is an added value on providing the application for public download and usage and it enables further testing and feedback that goes beyond a couple of users.
 
 \begin{figure}[H]
-\begin{adjustbox}{width=.6\textwidth,center=\textwidth}
+\begin{adjustbox}{width=1\textwidth,center=\textwidth}
   \centering
   \includegraphics[scale=1]{images/play_store.png}
 \end{adjustbox}

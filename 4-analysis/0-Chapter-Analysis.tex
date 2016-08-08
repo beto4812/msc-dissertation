@@ -6,7 +6,7 @@ The focus of this chapter is to establish and discuss what is the software going
   \centering
   \includegraphics[scale=1]{images/stakeholders.png}
 \end{adjustbox}
-  \caption[]{}
+  \caption[Colaborators in the project]{Collaborators in the project.}
   \label{fig:stakeholders}
 \end{figure}
 
@@ -37,7 +37,7 @@ In order to gain input from different perspectives, the following stakeholders w
           \item An application should give actionable feedback rather than just displaying information.
           \item Ask the users to know what they want.
       \end{itemize}
-      \item University of Edinburgh School of Informatics researchers: My supervisor Dr. Ewan Klein and Catherine Magill, both researchers at the Edinburgh living lab which focus is on open data and how it impacts on behavior and society. They also have a strong background on participatory design that addresses the way final users are involved as co-designers of a product. They were asked to provide feedback of inner prototypes.
+      \item University of Edinburgh School of Informatics researchers: My supervisor Dr. Ewan Klein and Catherine Magill, both researchers at the Edinburgh living lab which focus is on open data and how it impacts on behavior and society. They also have a strong background on participatory design, it addresses the way final users are involved as co-designers of a product. They were asked to provide feedback of inner prototypes.
 	\end{itemize}
     
 	\item Domain experts    
@@ -138,6 +138,7 @@ Summarizing from the meetings, the following was established as non functional r
 	\begin{itemize}
 		\item Not consume much storage space.
 		\item Not consume much battery.
+        \item Should be compatible with multiple devices. 
 	\end{itemize}
     \item Should be usable (\textbf{Usability}):
     \begin{itemize}
@@ -290,7 +291,7 @@ The Android device monitor helps to visualize the components that are taking par
   \centering
   \includegraphics[scale=1]{images/android_device_monitor_2.png}
 \end{adjustbox}
-  \caption[Andrroid activities lifecycle]{Android device monitor.}
+  \caption[Android device monitor]{Android device monitor.}
   \label{fig:android_device_monitor}
 \end{figure}
 
@@ -334,7 +335,7 @@ As the android OS and APIs (Aplication Programming Interfaces) are updated over 
 More in detail, the back-end architecture will be composed as shown in Figure \ref{fig:architecture_back_end_detail}. A virtual machine will run Ubuntu Linux because it is a very stable and compatible version of Linux. There was also a possibility to use a custom amazon flavor of Linux, which was not viable due software compatibility issues. The back-end will host two main components to power the application, the data service and the advice service. 
 
 \begin{figure}[H]
-\begin{adjustbox}{width=1\textwidth,center=\textwidth}
+\begin{adjustbox}{width=.6\textwidth,center=\textwidth}
   \centering
   \includegraphics[scale=1]{images/architecture_back_end_detail.png}
 \end{adjustbox}
@@ -345,14 +346,14 @@ More in detail, the back-end architecture will be composed as shown in Figure \r
 
 \subsection{Data Service}
 
- The air data source is the air quality in Scotland website. Because the service displays the updated readings in HTML, a web crawler is needed to navigate the readings making use of XPATH selectors to extract the required data. Once extracted, they will be inserted in JSON format directly to the dynamo database.
+ The air data source is the air quality in Scotland website. Because it displays the updated readings in HTML, a web crawler is needed to navigate the readings making use of XPATH selectors to extract the required data. Once extracted, they will be inserted in JSON format directly to the dynamo database.
  
 A daemon is a program that runs in the background autonomously, this daemon will call the web crawler every half hour to get the most up-to date readings from the air quality readings (They are updated at most each hour). 
 
 \subsection{Advice Service}
-The advice service will be responsible to provide health advice based on the CMEAP\cite{HealthProtectionAgencyfortheCommitteeontheMedicalEffectsofAirPollutants2011}. Before analyzing the techniques that can be considered to translate the advice from the CMEAP into a service, there are few things to notice. The document has different categories of advice based on the sensitivity and age of the persons, they are not simple data statements that can be easily used from a database, but more of simple logical statements. Also, it is likely that the health statements would need to be modified or expanded in the future. 
+The advice service will be responsible to provide health advice based on the CMEAP\cite{HealthProtectionAgencyfortheCommitteeontheMedicalEffectsofAirPollutants2011}. Before analyzing the techniques that can be considered to translate the advice from the CMEAP into a service, there are few things to notice. The document has different categories of advice based on the sensitivity and age of the persons, they are not simple data statements that can be easily used from a database, but more of logical statements. Also, it is likely that the health statements would need to be modified or expanded in the future. 
 
-When it comes to provide logic or 'intelligence' to a system in order for it to take choices (like the ones that are needed for the health advice) there are two general approaches that may be taken. Rule based systems and machine learning techniques. Rule based systems or expert systems are a good fit when all the options for the system are known beforehand; and when all the conditions can be easily written as \textit{if else statements}. On the other hand; machine learning techniques are useful when the datasets are fairly large and the rules have to be made at execution time. Because of this, the easiest way to provide the system the system the capability to give the required health advice given the user's personal circumstances is via an expert system.
+When it comes to provide logic or 'intelligence' to a system for it to take choices (like the ones that are needed for the health advice) there are two general approaches that may be taken. Rule based systems and machine learning techniques. Rule based systems or expert systems are a good fit when all the options for the system are known beforehand; and when all the conditions can be easily written as \textit{if else statements}. On the other hand; machine learning techniques are useful when the datasets are fairly large and the rules have to be made at execution time. Because of this, the easiest way to provide the system the capability to give the required health advice given the user's personal circumstances is via an expert system.
 
 \section{First prototype}
 Following the sketched application design and the interaction design methodology, the first prototype was drawn in order to accomplish the user requirements and to start defining how the final interface would look like. As mentioned, the application would be composed of three final distinct visualizations that will achieve the main functional requirements:
@@ -369,7 +370,7 @@ Following the sketched application design and the interaction design methodology
   \centering
   \includegraphics[scale=1]{images/firstPrototype.png}
 \end{adjustbox}
-  \caption[Frist prototype]{First prototype}
+  \caption[Frist prototype]{First prototype. From left to right: first, second and third visualization.}
   \label{fig:first_visualization_first_prototype}
 \end{figure}
 
@@ -378,12 +379,12 @@ Following the sketched application design and the interaction design methodology
 
 The first visualization would contain firsthand pertinent information that would accomplish different functions: letting know in an understandable, visual way the current air quality status and its components, providing information about the source of the air quality reading, showing the air quality advice given the user configuration and let the user configure the air quality advice in a playful way. We could think of this screen as a dashboard that will give the user the required basic information to use the rest of the application, in fact; the displayed by this screen is enough to get a full picture of what is going on without much detail.
 
-This screen is composed as shown in Figure \ref{fig:first_visualization_first_prototype}. It is visually divided into the top and bottom component. The top component is information about the sensor to provide the user confidence about the reading by means of a map, the hour it was last updated, and the name location of the sensor. The bottom component contains two bars: one for adjusting the sensitivity level, and the other one to show the air quality status followed by the advice and the pollutants that are taking part of the reading at the point it was taken. 
+This screen is composed as shown in Figure \ref{fig:first_visualization_first_prototype}. It is visually divided into the top and bottom component. The top component is information about the sensor to provide the user confidence about the reading by means of a map, the hour it was last updated, and the name location of the sensor. The bottom component contains two bars: one for adjusting the sensitivity level, and the other one to show the air quality status followed by the health advice in text and the pollutants that are taking part of the reading at the point it was taken. 
 
 \subsection{Second visualization}
 
-The second visualizations aims to provide an individual visual hint for each pollutant. The need for this visualization arises from the difficulty to observe at a pollutant level how the readings are without expert understanding of the air quality regulations. The overall idea is to show a list of the pollutants that are present at the moment with a visual cue to allow an immediate insight of the reading as well as containing the official measure and the measurement unit. Also, by clicking in each pollutant it will be possible to examine more specific information about the pollutant.
+The second visualizations aims to provide an individual visual hint for each pollutant. The need for this visualization arises from the difficulty to observe how the readings are at a pollutant level without expert understanding of air quality regulations. The overall idea is to show a list of the pollutants that are present at the moment with a visual cue to allow an immediate insight of the reading as well as containing the official measure and the measurement unit. Also, by clicking in each pollutant it will be possible to examine more specific information about the pollutant.
 
 \subsection{Third visualization}
 
-The final visualization will provide the full detail of how the readings were behaving through the day, or in a specific date. The need for this visualization arose from the need by sensitive persons to relate their symptoms to pollution spikes in order to gain knowledge about what might be affecting them at a pollutant level and enable them for better decision support based on this knowledge. For this purpose, a line graph is employed as is the most adequate tool to show readings over time. Also, the same pollutants that were taking part of the first and second visualizations will be consistent in this screen. The difference is that they will be touch-enabled to allow the user to select which  pollutant to visualize. At the top of the screen will be located a button to select pollution data from other dates. 
+The final visualization will provide the full detail of how the readings were behaving through the day, or in a specific date. The need for this visualization arose from the need by sensitive persons to relate their symptoms to pollution spikes in order to gain knowledge about what might be affecting them at a pollutant level and enable them for better decision support based on this knowledge. For this purpose, a line graph is employed as is the most adequate tool to show readings over time. Also, the same pollutants that were taking part of the first and second visualizations will be consistent in this screen. The difference is that they will be touch-enabled to allow the user to select which  pollutant to visualize as a way of providing interaction and control over the interface to the user. At the top of the screen will be located controls to define the specific date and time of the readings. 

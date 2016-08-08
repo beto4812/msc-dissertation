@@ -63,6 +63,14 @@
 \usepackage{csquotes}
 \renewcommand{\mkbegdispquote}[2]{\itshape}
 
+% Tables with fixed width
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+
 %% Information about the title, etc.
 \title{AirQueue: A personal mobile application to visualize air-quality in Scotland.}
 \author{Alberto Vazquez Martinez}
@@ -85,9 +93,10 @@
 \dedication{.}
 \tableofcontents
 \listoffigures
+\iffalse
 \listoftables
 \begin{accron}\input{acronyms}\end{accron}
-
+\fi
 \end{preliminary}
 
 \include{1-introduction/0-Chapter-Introduction}

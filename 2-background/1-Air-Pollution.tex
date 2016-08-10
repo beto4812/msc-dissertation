@@ -67,7 +67,7 @@ In order to understand the correlation between air quality data and its effects 
   \label{fig:air_quality_index}
 \end{figure}
 
-There is substantial evidence that the elderly, children, and persons that suffer from chronic diseases such as asthma are in greater danger of suffering symptoms and health consequences from lower pollution concentrations than the general public \cite{Koenig1999} \cite{Kampa2008} \cite{Zones2010}. The COMEAP includes such population in their Air Quality Index to give them the opportunity to modify their behaviour and reduce the severity of their symptoms. Furthermore, the air quality index is accompanied by a health advice, which provides specific health messages targeting both population groups, sensitive and non-sensitive providing information about the actions that should be taken to avoid symptoms and health effects as shown in Figure \ref{fig:air_quality_health_advice}. 
+There is substantial evidence that the elderly, children, and persons that suffer from chronic diseases such as asthma are in greater danger of suffering symptoms and health consequences from lower pollution concentrations than the general public \cite{Koenig1999} \cite{Kampa2008} \cite{Zones2010} . The COMEAP includes such population in their Air Quality Index to give them the opportunity to modify their behaviour and reduce the severity of their symptoms. Furthermore, the air quality index is accompanied by a health advice (Figure \ref{fig:air_quality_health_advice}) which provides specific health messages targeting both population groups, sensitive and non-sensitive providing information about the actions that should be taken to avoid symptoms and health effects.
 
 \begin{figure}[H]
 \begin{adjustbox}{width=1\textwidth,center=\textwidth}
@@ -78,16 +78,21 @@ There is substantial evidence that the elderly, children, and persons that suffe
   \label{fig:air_quality_health_advice}
 \end{figure}
 
-\iffalse
-\subsection{Air quality policies}
-How air quality policies differ around the world, and why this might be a problem.
-\fi
 
 \subsection{Air quality sensors}
 
 \begin{itemize}
 
-\item Fixed sensors:
+\item Fixed sensors: 
+
+Fixed sensors are installed and maintained by the UK government and local authorities in Scotland. There are of two kinds, automatic sensors from the Automatic Urban and Rural Network (AURN)\footnote{\url{https://uk-air.defra.gov.uk/networks/network-info?view=aurn}}, and non automatic sensors maintained by local Scottish councils. 
+
+	\begin{itemize}
+    
+    \item Automatic sensors: They produce hourly concentrations and data is sent automatically over the network. They purpose is to check that EU and other regulatory standards are being met as well as informing the public about air quality. These sensors monitor a wide range of pollutants (\NOX, \SOTWO, CO\textsubscript{2}, O\textsubscript{3}, \PMTWO and \PMTEN) which are later collected and processed by Ricardo Energy and Environment \footnote{\url{http://ee.ricardo.com}} and exposed through HTML webpages at the Scottish Air Quality website\footnote{\url{http://www.scottishairquality.co.uk/}} or CSV files provided on demand. 
+	\item Non automatic sensors: 
+    
+    \end{itemize}
 
 \item Portable sensors:
 

@@ -1,5 +1,5 @@
 \chapter{Analysis and Design}
-The focus of this chapter is to establish and discuss what is the software going to do, and how is going to achieve its intended goals. The actors in defining were from different institutions related to the issues treated by the project. This chapter describes how they were involved as stakeholders, co-designers and evaluators. 
+The focus of this chapter is to establish and discuss what the software is going to do, and how is going to achieve its intended goals. The actors in defining were from different institutions related to the issues treated by the project. This chapter describes how they were involved as stakeholders, co-designers and evaluators. 
 
 \begin{figure}[h]
 \begin{adjustbox}{width=1\textwidth,center=\textwidth}
@@ -10,58 +10,53 @@ The focus of this chapter is to establish and discuss what is the software going
   \label{fig:stakeholders}
 \end{figure}
 
-
 \section{Users and stakeholders}
-As mentioned before, prior to the start of the development phase, it is important to establish who are the intended users of the application, as well as the stakeholders. 
+As mentioned before, before the start of the development phase, it is important to establish who are the intended users of the application, as well as the stakeholders. 
 
 The following users were depicted for this development:
 
 \begin{itemize}
-	\item General public: The general public who is concerned whit the air quality of their environment.
+    \item General public: The general public who is concerned whit the air quality of their environment.
     \item Pollution-sensitive public: People at risk of suffering health consequences due to air pollution.
 \end{itemize}
 
-In order to gain input from different perspectives, the following stakeholders were involved through the development: 
+To gain input from different perspectives, the following stakeholders were involved in the development: 
 
 \begin{itemize}
-
-
-
 	\item Researchers 
     \begin{itemize}
-      \item Asthma UK researchers: Meetings were arranged with various researchers of the asthma UK group. They were involved early in the design of a first prototype, by providing ideas and highlighting issues that may arise from a medical researcher perspective. The queried researches were:  Dr. Aziz Sheikh, director of the research group, Dr. Soyiri Ireneous, and Dr. Lynn Morrice.
+      \item Asthma UK researchers: Meetings were arranged with various researchers of the Asthma UK group and. They were involved early in the design of a first prototype, by providing ideas and highlighting issues that may arise from a medical researcher perspective. The researchers were:  Dr Aziz Sheikh, director of the research group, Dr Soyiri Ireneous, and Dr Lynn Morrice. They belong as well to the Usher Institute of Population Health Sciences and Informatics\footnote{\url{http://www.ed.ac.uk/usher}}
+      
     The following issues were raised in the meetings:
       \begin{itemize}
-          \item Applications that rely on user input are not sustainable.
+          \item Based on their experience further considerations should be taken when designing applications that rely on user input.
           \item Review past approaches/work to avoid known problems.
           \item An application should give actionable feedback rather than just displaying information.
-          \item Ask the users to know what they want.
+          \item Ask the users in order to find out what they want.
       \end{itemize}
-      \item University of Edinburgh School of Informatics researchers: My supervisor Dr. Ewan Klein and Catherine Magill, both researchers at the Edinburgh living lab which focus is on open data and how it impacts on behavior and society. They also have a strong background on participatory design, it addresses the way final users are involved as co-designers of a product. They were asked to provide feedback of inner prototypes.
+      \item University of Edinburgh School of Informatics researchers: My supervisor Dr Ewan Klein and Catherine Magill, both researchers at the University of Edinburgh and part of the Edinburgh living lab which focus is on open data and how it impacts on behaviour and society. They also have a strong background in participatory design. They were asked to provide feedback on inner prototypes.
 	\end{itemize}
-    
 	\item Domain experts    
    \begin{itemize}
-      \item Chief Technology Officer: Simon Chapple acts as chief technology officer of Datalytics technology, a company who has expertise on developing mobile applications for a different range of platforms, his opinion would prove valuable with respect of more technical or design issues that may arise in the development. He was asked for feedback about the design of a prototype of the application.
+      \item Chief Technology Officer: Simon Chapple acts as CTO of Datalytics technology, a company who has expertise in developing mobile applications for a different range of platforms. His opinion would prove valuable on more technical or design issues that may arise in the development. He was asked for feedback about the design of a prototype of the application.
     The following recommendations were raised in the meeting:
     \begin{itemize}
-		\item User interfaces should aim to be self-explanatory. 
-		\item Colors should be consistent and provide meaning, as users associate colors to real world entities.
-		\item Further consideration should be taken when choosing a native vs hybrid development approach.
-		\item Welcome screens should have an immediate, understandable objective.   
-	\end{itemize}
-	\item How to ref this?: Mic starbuck, an activist who is involved in the guverment council and suffers from asthma was involved in the very first ideas of the design of the application, from his input, we were able to understand in a broad sense, what might an asthma sufferer need. (PEND)
-	\end{itemize}
+        \item User interfaces should aim to be self-explanatory. 
+        \item Colours should be consistent and provide meaning, as users associate colours to real world entities.
+        \item Further consideration should be taken when choosing a native vs. hybrid development approach.
+        \item Welcome screens should have an immediate, understandable objective.   
+    \end{itemize}
+\iffalse
+\item How to ref this?: Mic starbuck, an activist who is involved in the guverment council and suffers from asthma was involved in the very first ideas of the design of the application, from his input, we were able to understand in a broad sense, what might an asthma sufferer need. (PEND)
+\fi
+\end{itemize}
+    
 %"I wonder how you did the animations behave that way"
-
-	\item Users as stakeholders: The final users were involved in three stages, in the requirements elicitation, as co-designers for the prototypes, and as evaluators  of the final product. 
+    \item Users as stakeholders: The final users were involved in three stages. In the requirements elicitation, as co-designers for the prototypes, and as evaluators of the final product. 
     \begin{itemize}
-
-		    \item The Asthma UK patient group: The patient group of the Asthma UK for applied research was involved in two phases: The requirements elicitation via an online questionnaire, and the evaluation of the final product.
-			\item General public: They were involved in three phases: The requirements elicitation via an online questionnaire, the evaluation of inner prototypes and the evaluation of the final third prototype. 
-
-	\end{itemize}
-
+            \item Asthma UK patient group: They represent a sample of pollution-sensitive users and were involved in two phases: The requirements elicitation, which was carried out via an online questionnaire, and the evaluation of the third final prototype.
+            \item University of Edinburgh students: They represent a sample of the general population and were involved in three phases: The requirements elicitation, which was carried out via an online questionnaire, the evaluation of inner prototypes and the evaluation of the third final prototype. 
+    \end{itemize}
 \end{itemize}
 
 \section{Requirements elicitation}
@@ -77,13 +72,13 @@ According to Somerville \cite{Sommerville2010}:
 \end{itemize}
 \end{displayquote}
 
-The main functional requirements were elicited from the users because they were the first reason of the development. This was done through an online survey monkey questionnaire\footnote{\url{https://www.surveymonkey.com/results/SM-Z7HH28LM/}}, the survey was sent to the aforementioned Asthma UK patient group, and to the general public through different survey collectors to be able to compare the responses between them. Feedback from researchers and domain experts was taken into account as non-functional requirements, they did not ask for any function per se. but just established some guidelines and features that would be nice to have in an application. 
+The main functional requirements were elicited from the users because they were the first reason of the development. This was done through an online Survey Monkey questionnaire,\footnote{\url{https://www.surveymonkey.com/results/SM-Z7HH28LM/}} sent to the Asthma UK patient group and to students from the University of Edinburgh through different survey collectors to be able to compare the responses between them. Feedback from researchers and domain experts was taken into account as non-functional requirements as they did not ask for any function per se but just established some guidelines and features that would be nice to have in an application.
 
 \subsection{Survey}
 
-When designing the questionnaire, there was an interest in knowing which existing air quality data sources both kind of users were employing and what did they find useful from those sources, they were also queried regarding on how often they were using the information sources, their ages, and their needs towards a new air-quality application.
+When designing the questionnaire, there was an interest in knowing what existing air quality data sources both kinds of users were employing and what did they find useful from those sources. They were also queried regarding on how often they were using the information sources, their ages, and their needs towards a new air-quality application.
 
-The total number of responses were 11, 8 of them being from the patient group, and 3 of them from the general public. The ages of the respondents were varied: 3 between 25-34, 3 between 65-74, 2 between 18-24, 2 between 35-44 and one between 55-64 years old as shown in the figure \ref{fig:survey_ages}. 
+The total number of responses were 11, 8 of them being from the patient group, and 3 of them from the general public. The ages of the respondents were varied: three between 25-34, 3 between 65-74, 2 between 18-24, 2 between 35-44 and 1 between 55-64 years old as shown in the figure \ref{fig:survey_ages}. 
 
 \begin{figure}[H]
 \begin{adjustbox}{width=1\textwidth,center=\textwidth}
@@ -94,9 +89,11 @@ The total number of responses were 11, 8 of them being from the patient group, a
   \label{fig:survey_ages}
 \end{figure}
 
-Regarding previous usage of air quality sources, its was shown that only half of the sensitive respondents were able to name the websites or applications they were currently using, while all the non sensitive respondents named at least one source of information. Also, the sensitive respondents who reported the use of air quality sources, tended to use them in a more regular basis than non sensitive users. Reflecting on these answers: sensitive users may be inclined to require a support tool on a regular basis, but not all of them are aware of their existence or does not feel the current sources meet their needs. 
+Regarding the previous usage of air quality sources, only half of the pollution-sensitive respondents were able to name the websites or applications they were currently using, while all the non-sensitive respondents named at least one source of information. Also, the sensitive respondents who reported the use of air quality sources tended to use them on a more regular basis than non-sensitive users. Reflecting on these answers: sensitive users may be inclined to require a support tool on a regular basis, but not all of them are aware of their existence or does not feel the current sources meet their needs. 
 
-The main findings from the survey were the potential new functionalities that users would like in a new air quality application, they depict that there are undressed needs from current AQ sources. These are the main focus of the development of a new air quality application. From the \ref{fig:survey_new_features} we can see that the most important need is to visualize different individual pollutants, as current approaches often fail  on treating them individually in order to enable decisions based on individual readings. The second most important undressed need is to be able to personalize the air quality advice given their personal circumstances; and the third most important requirement is to compare and visualize individual pollutants over different periods of time. Another interesting outcome of this question was if including tools that would allow the users to keep track of their symptoms would be of interest; but just three of the eleven queried persons responded this is the case. Response later supported from researchers in the health field based on their experiences. 
+The main findings from the survey were the potential new functionalities that users would like in a new Air Quality application; suggesting that there are unaddressed needs from current AQ sources. These are the main focus of the development of a new AQ application. From the \ref{fig:survey_new_features} we can see that the most important need is to visualise different individual pollutants, as current approaches often fail on treating them individually to enable decisions based on individual readings. The second most important unaddressed need is to be able to personalise the air quality advice given their personal circumstances. The third most important requirement is to compare and visualise individual pollutants over different periods of time. 
+
+Another interesting outcome was whether including tools that would allow the users to keep track of their symptoms would be of interest. Just three of the eleven queried persons responded positively. Suggesting that they may feel unnecessary or tedious to input their symptoms data on a regular basis.
 
 
 \begin{figure}[H]
@@ -110,52 +107,50 @@ The main findings from the survey were the potential new functionalities that us
 
 \subsection{Interviews}
 
-Meetings were held with the aforementioned researchers and domain experts to receive input from different points of view. At early stages of the design, the first person who showed interest was Mic. Starbuck. From his perspective as a person suffering from asthma; he mentioned the need of a tool to be able to visualize the relative impact upon a person's health given different factors: like a person's health status, location, altitude, and specific pollution particles. He mentioned as well that he browsed the web frequently to understand how the AQ was behaving at different points of the day in order to decide whether or not going outside or perform certain activities. 
+Meetings were held with the aforementioned researchers and domain experts to receive input from different points of view. At an early stage of the design, the first person who showed interest was Mic Starbuck. From his perspective as a person suffering from asthma he mentioned the need for a tool to be able to visualise the relative impact upon a person's health given different factors: like a person's health status, location, altitude, and individual pollutants. He mentioned as well that he browsed the web frequently to understand how the AQ is behaving at different points of the day to decide whether or not going outside or perform certain activities. 
 
-Later on, the Asthma UK center for applied research showed interest and a meeting was arranged. It took place with Dr. Aziz Sheikh, Moyrrice Lynn, Dr. Soyiri Ireneous and Cat. Mcgill. They showed a favorable interest on collaborating with this project as well as participating closely to the School of Informatics in future research. They were presented with mock-ups as ideas for an application that would accomplish visualization and tracking purposes. Visualizations from the need previously pointed out by Mic. Starbuck, and tracking from the need from asthma-sufferers to manage their own illness by keeping their own digital diary of symptoms and pollution spikes to be able to take better informed choices related to their health. However based on previous work on tracking asthma status; they pointed out that applications that rely on user input are not sustainable; as they have to account for more factors, such as the person's age, health issues, and the ability to remember and record events by themselves correctly. Because of this, at this point more focus was paid in the visualization and recommendation capabilities than the tracking capabilities. 
+Later on, the Asthma UK Center for Applied Research showed interest and a meeting was arranged. It took place with Dr Aziz Sheikh, Lynn, Morrice, Dr Soyiri Ireneous and Catherine Magill. They showed a favourable interest in collaborating with this project as well as participating closely to the School of Informatics in future research. They were presented with mock-ups as ideas for an application that would accomplish visualisation and tracking purposes. Visualisations from the need previously pointed out by Mic Starbuck, and tracking from the need from asthma sufferers to manage their illness by keeping their digital diary of symptoms and pollution spikes to be able to take better informed choices related to their health. However based on previous work on tracking asthma status they pointed out that applications that rely on user input should take into further consideration the particular context of the user to succeed. For instance, much effort would be required to develop interfaces suited for different types of users. Because of this more focus was paid in the visualisation and recommendation capabilities than the tracking capabilities.
 
-Another meeting was held with Dr. Soyiri Ireneous who's main research is on asthma, and Catherine Magill. The purpose of this meeting was to understand more in-depth the consequences of air pollution upon a person's health and how they might be presented in an air quality application. The possibility to include a health advice was discussed, and he brought up the issue of giving health feedback that can be accounted at the moment of a contingency. Also, Dr. Soyiri as a mobile phone user was concerned is concerned with the speed of the applications he installs, as well the memory and battery usage.
-
+Another meeting was held with Dr Soyiri Ireneous whose main research is in asthma, and Catherine Magill. The purpose of this session was to understand more in-depth the consequences of air pollution upon a person's health and how they might be presented in an air quality application. The possibility to include health advice was discussed, as data that is accompanied with an easy to follow advice is more valuable than data alone because the user can immediately know what to do under special circumstances. Also, Dr Soyiri as a mobile phone user was concerned is concerned with the speed of the applications he installs, as well the memory and battery usage.
 
 \subsection{Functional requirements}
 
-Because the time is limited; the development will try to cover the first three and most important needs given by the final users as illustrated in the past section. The following list summarizes the final formal functional requirements for the development:
+Because the time was limited; the development covered the first three and most important needs given by the final users as illustrated in the past section. The following list summarises the final formal functional requirements for the development:
 
 \begin{itemize}
-	\item Being able to visualize the air quality status in general.
-	\item Being able to visualize individual pollution particles status and information on how the impact on a person's health.
-	\item Being able to visualize individual pollution particles over time.
-    \item Being able to receive actionable health advice.
-    \item Being able to personalize the received health advice.
+    \item Being able to visualise the air quality status in general.
+    \item Being able to visualise individual pollutants status and information on how the impact on a person's health.
+    \item Being able to visualise individual pollutants over time.
+    \item Being able to receive advice about the air pollution based on the variables known by the application. That is the user location, age and pollution sensitivity. 
+    \item Being able to personalise the received advice indicating the personal pollution tolerance or sensitivity.
 \end{itemize}
 
 \subsection{Non functional requirements}
 
-Summarizing from the meetings, the following was established as non functional requirements:
+Summarising from the meetings, the following was established as non-functional requirements:
 
 \begin{itemize}
-	\item Should be adequate for mobility (\textbf{Mobility}).
-	\begin{itemize}
-		\item Not consume much storage space.
-		\item Not consume much battery.
-        \item Should be compatible with multiple devices. 
-	\end{itemize}
-    \item Should be usable (\textbf{Usability}):
+    \item Is adequate for mobile devices (\textbf{Mobility}).
     \begin{itemize}
-		\item Easy to learn.
+        \item Does not consume much storage space.
+        \item Does not consume much battery.
+        \item Is compatible with multiple devices.
+    \end{itemize}
+    \item Is usable (\textbf{Usability}):
+    \begin{itemize}
+        \item Easy to learn.
         \item Attractive to use.
-	\end{itemize}
-    \item Should be efficient (\textbf{Performance}).
+    \end{itemize}
+    \item Is efficient (\textbf{Performance}).
     \begin{itemize}
-		\item Start rapidly
-        \item Load and display visualizations fast
-	\end{itemize}
-    
+        \item Starts rapidly
+        \item Loads and displays visualizations fast
+    \end{itemize}
 \end{itemize}
 
 
 \section{System architecture}
-In order to accomplish the requirements, it is important to consider design choices that could add towards qualities that are more adequate for this kind of development. For this, a trade-off between the three main qualities for the software will be considered as shown in Figure \ref{fig:balance_attributes}, as it is not always possible to have everything in a system because some attributes may contradict between each other. For example, doing an extremely animated and attractive design would affect the performance of the system and its capability to accomplish the main goal. Architectural choices will be taking into account this trade-off.
+In order to accomplish the requirements, it is important to consider design choices that could add towards qualities that are more adequate for this kind of development. For this, a trade-off between the three qualities of the software will be considered as shown in Figure \ref{fig:balance_attributes}, since it is not always possible to have everything in a system because some attributes may be in conflict. For example, doing an extremely animated and attractive design would affect the performance of the system and its capability in accomplishing the primary goal. Architectural choices will be taking into account this trade-off.
 
 
 \begin{figure}[H]
@@ -167,8 +162,8 @@ In order to accomplish the requirements, it is important to consider design choi
   \label{fig:balance_attributes}
 \end{figure}
 
-\subsection{Development approach and operative system}
-It is possible that the development could take a hybrid or a native approach, as summarized in the table \ref{tab:development_approaches}. In a nutshell, it means that the software could be developed in a web-browser container and therefore be compatible with all devices able to display modern web-pages, or be developed using the native software development kit for each system (Android, iOS, etc); being only compatible with that specific operative system. A native development approach carries the disadvantage that new code would be needed for each operative system; but gaining many benefits, such as the response speed, being able to use advanced graphics and animation techinques; and having an easy access to the native APIS and components of the device (Such GPS or gyroscpe). In order to gain performance and usability a native approach has been chosen. Following it is important to define the operative system target, which will solely based on the market share of the most important operative systems according to IDC \footnote{\url{http://www.idc.com/prodserv/smartphone-os-market-share.jsp}}. Android keeps an enormous share of 82.8\% compared to a 13.9\% of iOS, and a 2.6\% of Windows phone (other systems just account for less than 1 percent of the market share.), because of this to target a wider range of mobile phone users the selected operative system is Android.
+\subsection{Development approach and operating system}
+It is possible that the development could take a hybrid or a native approach, as summarised in Table \ref{tab:development_approaches}. In a nutshell, it means that the software could be developed in a web-browser container and therefore be compatible with all devices able to display modern web-pages, or be developed using the native software development kit for each system (Android, iOS, etc) being only compatible with that specific operative system. A native development approach carries the disadvantage that new code would be needed for each operative system, but gaining many benefits, such as the response speed, being able to use advanced graphics and animation techniques and having an easy access to the native APIs and components of the device (e.g. GPS and gyroscope). In order to gain performance and usability a native approach has been chosen. Consequently, it is important to define the operating system target, which will solely be based on the market share of the most important operating systems according to IDC \footnote{\url{http://www.idc.com/prodserv/smartphone-os-market-share.jsp}}. Android holds an enormous share of 82.8\%, compared to 13.9\% of iOS, and 2.6\% for Windows phone (other systems just account for less than 1 percent of the market share.), because of this to target a wider range of mobile phone users the selected operative system is Android.
 
 \begin{table}[ht]
 \centering
@@ -191,9 +186,9 @@ It is possible that the development could take a hybrid or a native approach, as
 \footnotetext{\url{http://julyrapid.com/hybrid-vs-native-mobile-app-decide-5-minutes/}}
 
 \subsection{Air quality data source}
-It was considered to acquire personal air quality sensors to provide real-time high resolution data to the system; unfortunately, such devices are still not very feasible as they are costly and become disposable over time due its loose of accuracy. One example is the Libelium gases pro sensor, which costs around \euro{}2000 and has an approximate lifetime of 12 months\footnote{\url{http://www.libelium.com/calibrated-air-quality-gas-dust-particle-matter-pm10-smart-cities/}}. 
+It was considered to acquire personal air quality sensors to provide real-time high-resolution data to the system; unfortunately, such devices are still not very feasible as they are costly and become obsolete over time due to loose of accuracy. One example is the Libelium Gases PRO sensor, which costs around \euro{}2000 and has an approximate lifetime of 12 months\footnote{\url{http://www.libelium.com/calibrated-air-quality-gas-dust-particle-matter-pm10-smart-cities/}}. 
 
-As mentioned in the background section there are currently many fixed sensors around Scotland which include different measures depending on the type of the sensor. However, the data sensed with this devices is not exposed through any public API from the Scottish government. But just as plain HTML web-pages. One possibility as well is use any third party air quality data source; such as the breezometer air quality API\footnote{\url{https://breezometer.com/air-quality-api/overview/}} or the OpenAQ API\footnote{\url{https://openaq.org/#/}}. The first one is a private source of air quality data which bills for the queries to the service and may become not very cost-effective, the second is a public API source, but the number of sensors from each city in Scotland are limited compared to the official government sources. An example of this is the city of Glasgow, which from the official sources has 26 fixed sensors and from the public API only 4 are available. Because of this, to have a more accurate air quality source the data will be collected from the official sources and exposed to later query from the device. 
+As mentioned in the background section there are currently many fixed sensors around Scotland which include different measures depending on the type of the sensor. However, the data sensed by this devices is not exposed through any public API from the Scottish government, but as plain HTML web-pages. One possibility as well is using any third party air quality data source; such as the Breezometer air quality API\footnote{\url{https://breezometer.com/air-quality-api/overview/}} or the OpenAQ API\footnote{\url{https://openaq.org/#/}}. The first one is a private source of air quality data which bills for the queries to the service and may become not very cost-effective, the second is a public API source, but the number of sensors from each city in Scotland are limited compared to the official government sources. An example of this is the city of Glasgow, which from the official sources has 26 fixed sensors and from the public API only 4 are available. Because of this, to have a more accurate air quality source the data will be collected from the official sources and exposed to later query from the device. 
 
 Missing this: (REF)
 http://www.scottishairquality.co.uk/data/
@@ -210,14 +205,14 @@ IaaS or Infrastructure as a service is a cloud service that provides computing i
 Because of budget constraints, the most cost-effective solution was chosen, being Amazon's free tier the most generous allowing up to 12 month of free usage, as opposed to Microsoft's 30 days trial and Google's 60 days trial.
 
 \subsection{Back-end technological choices}
-The back end component of the system will perform 2 functions. Gather the required air quality data and insert it into a database; and provide service to the mobile application. For the  first function; the easiest way to do it is via any available web-crawling libraries, such as Jspider\footnote{\url{http://j-spider.sourceforge.net/}} for Java or Scrapy \footnote{\url{http://scrapy.org/}} for Python. Scrapy was chosen because it is a complete and stable framework that can handle the crawling operations in an easy way. 
-For the second component; there is a need for a more robust component which can handle multiple queries to the health advice presented in Android. Because of this, Java will be (PEND)
+The back end component of the system will perform 2 functions: Gather the required air quality data and insert it into a database; and provide service to the mobile application. For the  first function the easiest way to do it is via any available web-crawling libraries, such as Jspider\footnote{\url{http://j-spider.sourceforge.net/}} for Java or Scrapy \footnote{\url{http://scrapy.org/}} for Python. Scrapy was chosen because it is a complete and stable framework that can handle the crawling operations in an easy way. 
+For the second component there is a need for a more robust component which can handle multiple queries to the health advice presented in Android. Because of this, Java will be (PEND)
 
 \subsection{Schema-free database}
 There will be the need to store the air quality readings somewhere to later query from the device. For this, there is the option to use standard SQL databases or schema-free databases. Analyzing the data that will be stored in further detail it will contain the readings gathered from each sensor in Scotland, and specific information such as their name, location and type of sensor. It is simple enough to be inserted without needing any relational schema . Moreover, the transactions between the devices and the database should be as fast as possible; without caring to much for instant reliability (because the sensors are updated at the soonest each hour). Taking into account these factors, it is more suitable the usage of a schema free database or NoSQL, specifically, it will be used a Dynamo NoSQL from the same Amazon Web Services infrastructure because it integrates easily with the already chosen IaaS. 
 
 \subsection{Overall design}
-The overall design of the infrastructure will be as shown in Figure \ref{fig:architecture}. The back-end and the database components will be running in amazon web services, and the android device will make use of the AWS SDK to make queries to the dynamo database; and REST services to query the advice server running on Java. (PEND explain more?)
+The overall design of the infrastructure will be as shown in Figure \ref{fig:architecture}. The back-end and the database components will be running in Amazon Web Services, and the Android device will make use of the AWS SDK to make queries to the Dynamo database, and REST services to query the advice server running on Java. (PEND explain more?)
 
 \begin{figure}[H]
 \begin{adjustbox}{width=.8\textwidth,center=\textwidth}
@@ -229,12 +224,13 @@ The overall design of the infrastructure will be as shown in Figure \ref{fig:arc
 \end{figure}
 
 \section{Mobile application}
-The Android application will be the visible interface for the final user. At this point it is pertinent to understand the design choices that can affect towards our main quality attributes: the design of the user interface, and the lower-level issues related to the management of the screen components. 
+The Android application will be the visible interface for the final user. At this point it is pertinent to understand the design choices that can affect our main quality attributes. The design of the user interface and the lower-level issues related to the management of the screen components. 
 
 \subsection{User interface}
-Three distinct screens will accomplish the functional requirements as shown in Figure \ref{fig:chain_of_screens}. The first screen will be responsible for displaying a general overview and the personalized advice, the second screen will show individual pollutants; and the third screen will show individual pollutants over time. 
+Three distinct screens will accomplish the functional requirements as shown in Figure \ref{fig:chain_of_screens}. The first screen will be responsible for displaying a general overview and the personalised advice, the second screen will show individual pollutants, and the third screen will show individual pollutants over time. There will be another introductory screen to allow users to input the personal details needed for the application.
 
-One useful guideline at design level in order to connect the screen between each other is simplicity. Having many different screens that accomplish many different purposes could result in overwhelming the user, because of this, the screens will be accessible at every time using a tabbed menu and enabling gestures to navigate through them. That is, the screens will become active by selecting a tab, or by swiping between them.
+One useful guideline at the design level to connect the screen between each other is simplicity. Having many different screens that accomplish many different purposes could result in overwhelming the user, because of this, the screens will be accessible at every time using a tabbed menu and enabling gestures to navigate through them. That is, the screens will become active by selecting a tab, or by swiping between them.
+
 
 \begin{figure}[H]
 \begin{adjustbox}{width=.45\textwidth,center=\textwidth}
@@ -246,11 +242,11 @@ One useful guideline at design level in order to connect the screen between each
 \end{figure}
 
 \subsection{Activities}
-The former screens will be developed individually by the use of activities. An activity is the abstraction used by the Android framework to contain the visual and run-time elements of the current displayed screen. The way activities are created and maintained in the screen is quite unusual in contrast with standard Java Swing interfaces. It makes use of an event driven life-cycle that must be understood ahead in order to achieve an smooth and error-free behavior. 
+The former screens will be developed individually by the use of activities. An Activity is the abstraction used by the Android framework to contain the visual and run-time elements of the currently displayed screen. The way Activities are created and maintained in the screen is quite unusual in contrast with standard Java Swing interfaces. It makes use of an event driven life-cycle that must be understood ahead to achieve an smooth and error-free behavior. 
 
-Because the available RAM is limited in a handled device and it has to be shared with all other running applications, it is not possible to maintain  all activities instances in memory. The activities lifecycle is a workaround for this problem, allowing the dalvik virtual machine (A virtual machine that runs all Android programs) to automatically handle which activities will be kept on memory. Therefore, it is unknown the time it will be requested to start-up resume or stop and all possible precautions should be taken for it to keep working from any call point .
+Because the available RAM is limited on a handheld device and it has to be shared with all other running applications, it is not possible to maintain  all activities instances in memory. The activities lifecycle is a workaround for this problem, allowing the Dalvik virtual machine (A virtual machine that runs all Android programs) to automatically determine which activities will be kept in memory. Therefore, it is unknown the time it will be requested to start-up resume or stop and all possible precautions should be taken for it to keep working from any call point .
 
-The lifecycle is illustrated in Figure \ref{fig:activities_lifecycle}, it can be observed that the first method called by Android is the \textit{onCreate()} method, used to instantiate the requested activity and any screen components. Later on, the application can pass to other states until it is stopped and started again from a different entry point to the one it was previously created from. The activities should be able to handle both starting points and restore any state left by the user when the activity was requested to stop. 
+The lifecycle is illustrated in Figure \ref{fig:activities_lifecycle}. It can be observed that the first method called by Android is the \textit{onCreate()} method, used to instantiate the requested activity and any screen components. Later on, the application can pass to other states until it is stopped and started again from a different entry point to the one it was previously created from. The activities should be able to handle both starting points and restore any state left by the user when the activity was requested to stop. 
 
 \begin{figure}[H]
 \begin{adjustbox}{width=1\textwidth,center=\textwidth}
@@ -263,8 +259,7 @@ The lifecycle is illustrated in Figure \ref{fig:activities_lifecycle}, it can be
 \footnotetext{\url{https://developer.android.com/training/basics/activity-lifecycle/starting.html}}
 
 \subsection{Layouts}
-The main component to render a screen in Android is the Layout. Layouts make use of XML to define the objects in the screen as shown in the example bellow, which renders a \textit{TextView} object followed by a \textit{Button} object. Layouts need to be attached to an activity or fragment to give them behavior. Once attached, the components defined by the layout can be extracted by using their id's and the method \textit{findViewByID}
-
+The main component to render a screen in Android is the Layout. Layouts make use of XML to define the objects in the screen as shown in the example bellow, which renders a \textit{TextView} object followed by a \textit{Button} object. Layouts need to be attached to an activity or fragment to give them behaviour. Once attached, the components defined by the layout can be extracted by using their id's and the method \textit{findViewByID}
 \begin{verbatim}
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -282,9 +277,9 @@ The main component to render a screen in Android is the Layout. Layouts make use
 </LinearLayout>
 \end{verbatim}
 
-It is important to understand the correct coupling of Android layouts because this influences how fast the screen is rendered. The rendering process is called \textit{inflating} and occurs in the \textit{onCreate()} method. As the activities are rendered on the screen; children components are attached and may call to render their own layout and so on, potentially languishing the the application. For this purpose, the android SDK makes available the Android device monitor that can be employed to understand how much time is taking to render all the components displayed at a given time. 
+It is important to understand the correct coupling of Android layouts because this influences how fast the screen is rendered. The rendering process is called \textit{inflating} and occurs in the \textit{onCreate()} method. As the activities are rendered on the screen children components are attached and may call to render their own layout and so on, potentially slowing down the the application. For this purpose, the Android SDK makes available the Android device monitor that can be employed to understand how much time is taking to render all the components displayed at a given time. 
 
-The Android device monitor helps to visualize the components that are taking part of the screen at some point in run-time. It shows from the top most element (the root) to the bottom most element (the leafes), how they are attached together and which element of the entire tree is taking the most time to render helping in the debugging process. As shown in figure \ref{fig:android_device_monitor} the delaying components are marked with red dots; wich means that the rendering of that specific screen component is among the slowest half of views, the yellow means the view renders faster than the bottom half of the other views and the green means that renders faster than at least half of the other views. The understanding of this tool is important in order to achieve the required performance quality attribute. 
+The Android device monitor helps to visualise the components that are taking part of the screen at some point in run-time. It shows from the top most element (the root) to the bottom most element (the leaf) how they are attached together and which element of the entire tree is taking the most time to render, helping in the debugging process. As shown in Figure \ref{fig:android_device_monitor} the delaying components are marked with red dots; wich means that the rendering of that specific screen component is among the slowest half of views, the yellow means the view renders faster than the bottom half of the other views and the green means that renders faster than at least half of the other views. The understanding of this tool is important in order to achieve the required performance quality attribute. 
 
 \begin{figure}[H]
 \begin{adjustbox}{width=1\textwidth,center=\textwidth}

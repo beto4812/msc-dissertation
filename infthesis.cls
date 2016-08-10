@@ -392,6 +392,8 @@ Computer Science}}
   \newcommand{\SOTWO}{SO\textsubscript{2}\@\xspace}
   \newcommand{\NOX}{NO\textsubscript{x}\@\xspace}
   \newcommand{\PMTEN}{PM\textsubscript{10}\@\xspace}
+  \newcommand{\PMTWO}{PM\textsubscript{2.5}\@\xspace}
+  \newcommand{\PMONE}{PM\textsubscript{1}\@\xspace}
   \newcommand{\eg}{e.g.\@\xspace}
   \newcommand{\Eg}{E.g.\@\xspace}
   \newcommand{\ie}{i.e.\@\xspace}

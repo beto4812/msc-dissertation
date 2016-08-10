@@ -1,7 +1,8 @@
 \section{Data visualization}
 
 \subsection{Definition}
-A number of definitions have been attributed to explain what data visualization means. According to Friendly \cite{Friendly2009} the term arose together with the birth of statistical thinking, being a way to illustrate mathematical language, their trends, tendencies and distributions trough the use of diagrams and graphics. Few \cite{StephenFew2013} describes it as a graphical display of abstract information for the purpose of sense-making and communication. However, for the grounds of my project, the term can be  ambiguous without bearing in mind the last decade advances in statistics and computer science, in the sense that the aforementioned concepts do not exclude printed or non-computerized data representations like the shown in figure \ref{fig:air_pollution_infographic}. Thus, the definition offered by Iliinsky and Steele \cite{Iliinsky2011} is more specific: 
+A number of definitions have been proposed to explain what data visualisation means. According to Friendly \cite{Friendly2009} the term arose together with the birth of statistical thinking, being a way to illustrate mathematical language, their trends, tendencies and distributions trough the use of diagrams and graphics. Few \cite{StephenFew2013} describes it as a graphical display of abstract information for the purpose of sense-making and communication. 
+However, the definition does not exclude representations that are not algorithmically drawn. The definition offered by Iliinsky and Steele \cite{Iliinsky2011} is more specific: 
 \begin{displayquote}
 Any visual representation of data that is:
 	\begin{itemize}
@@ -11,7 +12,7 @@ Any visual representation of data that is:
 	\item relatively data-rich (large volumes of data are welcome and viable, in contrast to infographics).
     \end{itemize}
 \end{displayquote}
-
+\iffalse
 \begin{figure}[h]
   \centering
   \begin{adjustbox}{width=.8\textwidth,center=\textwidth}
@@ -20,11 +21,11 @@ Any visual representation of data that is:
   \caption[Air pollution infographic]{Air pollution infographic \cite{NiallMcCarthy}}
   \label{fig:air_pollution_infographic}
 \end{figure}
-
+\fi
 A visualization helps towards understanding data  by taking advantage of the human visual system to process a large amount of information quickly, thus allowing the human brain to identify patterns, links and relationships between the represented objects. Daniel et al. \cite{KeimDaniel2010}, also states that visualizing enables people to: 
 \begin{displayquote}
 	\begin{itemize}
-\item  Synthesise information and derive insight from massive, dynamic, ambigu- ous, and often conflicting data.
+\item  Synthesise information and derive insight from massive, dynamic, ambiguous, and often conflicting data.
 \item Detect the expected and discover the unexpected.
 \item Provide timely, defensible, and understandable assessments.
 \item Communicate these assessment effectively for action.
@@ -34,7 +35,7 @@ A visualization helps towards understanding data  by taking advantage of the hum
 Data visualization is essential when the available data is vast and dynamic, and when raw data does not make sense by its own. Therefore, data must be encoded using technological, and design elements;  potentially making use of disciplines such as statics, data mining, human computer interaction and graphic design. 
 
 \subsection{Designing data visualizations}
-The figure in \ref{fig:data_visualization_process} depicts the visual analysis process according Daniel et al. \cite{KeimDaniel2010}. In the first stage,  data should be collected, (usually from many distinct data sources) and standardized into one common format. This later enables to choose between the creation of models, or visualizations; models are an automated representation that requires data mining techniques; whereas visualizations are manual representations that can be created through simple mapping from data to the visual context. Both representations are linked together, to enable validation and refinement through iteration. The final stage; which is the one we are more concerned with; is the knowledge gained from the representation; which will aim to respond the questions for which they were created in the first place.
+The Figure \ref{fig:data_visualization_process} depicts the visual analysis process according Daniel et al. \cite{KeimDaniel2010}. In the first stage,  data should be collected, (usually from many distinct data sources) and standardised into one common format. This later enables us to choose between the creation of models, or visualisations; models are an automated representation that requires data mining techniques; whereas visualisations are manual representations that can be created through simple mapping from data to the visual context. Both representations are linked together, to enable validation and refinement through iteration. The final stage; which is the one we are more concerned with is the knowledge gained from the representation; which will aim to respond the questions for which they were created in the first place.
 \begin{figure}[!htb]
 \begin{adjustbox}{width=1\textwidth,center=\textwidth}
   \centering
@@ -44,7 +45,7 @@ The figure in \ref{fig:data_visualization_process} depicts the visual analysis p
   \label{fig:data_visualization_process}
 \end{figure}
 
-According to Ben Fry \cite{Cleveland1993}, one specific approach for data visualizations is illustrated in figure \ref{fig:data_visualization_stages}, which establishes a common series of steps that can be followed for this purpose :
+According to Ben Fry \cite{Cleveland1993}, one specific approach for data visualisations is illustrated in Figure \ref{fig:data_visualization_stages}, which establishes a common series of steps that can be followed for this purpose:
 
 \begin{displayquote}
 	\begin{itemize}
@@ -66,9 +67,9 @@ According to Ben Fry \cite{Cleveland1993}, one specific approach for data visual
   \caption[Visualization stages]{Visualization stages  \cite{Cleveland1993} }
   \label{fig:data_visualization_stages}
 \end{figure}
-These visualization stages start again from a question, which may not be immediate answerable from the raw data, and goes through the steps until arriving a desired answer; it is also observed that the stages are linked together and one may back to redefine the process at some stage. Both methods mentioned above s are similar in between. While the later builds an easy to follow framework for any visualization project; the former recognizes that not all steps are needed in many situations.
+From this perspective, it is possible to establish that all visualisations require an elemental process guided by the designer to enable the recognition of patterns within the data. Also that the design process is an iterative task where the designer may go back to redefine any stage of the process until achieving the desired result. 
 
 \subsection{Data visualizations for decision support}
-"A decision-making process usually includes the acquisition of related information, the construction of a mental representation of the problem and solutions, and the identification of an optimal solution" \cite{carroll1987mental} as cited in \cite{Zhu2008}, decision making involves acquiring domain specific information about a particular question; which is the intended output of a data visualization. It is therefore important to understand the effects of data visualizations in decision support making, if any.
+\quotes{A decision-making process usually includes the acquisition of related information, the construction of a mental representation of the problem and solutions, and the identification of an optimal solution} \cite{carroll1987mental} as cited in \cite{Zhu2008}, decision making involves acquiring domain-specific information about a particular question which is the intended output of a data visualisation. It is, therefore, important to understand the effects of data visualisations in decision support making, if any.
 
-The decision making process takes into account the decision maker's skill, the decision task, and the problem space. In our specific context, the decision maker, should be able to understand the data in its represented space (visualization), evaluate the problem (avoid air pollution), and execute a decision task (leave the polluted space). "A well designed visualization takes features of the decision task and the characteristics of the decision makers into consideration" \cite{Zhu2008}. Thus, visualizations should be created in the specific context of the decision makers; discovering beforehand the knowledge they should have; the problems they are likely to face; and the potential decisions they should be able to take. 
+The decision-making process takes into account the decision maker's skill, the decision task, and the problem space. In our specific context, the decision maker, should be able to understand the data in its represented space (visualisation), evaluate the problem (avoid air pollution), and execute a decision task (leave the polluted space). \quotes{A well-designed visualisation takes features of the decision task and the characteristics of the decision makers into consideration} \cite{Zhu2008}. Thus, visualisations should be created in the specific context of the decision makers; discovering beforehand the knowledge they should have; the problems they are likely to face; and the potential decisions they should be able to take. 

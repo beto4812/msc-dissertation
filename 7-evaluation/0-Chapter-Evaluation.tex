@@ -1,15 +1,15 @@
 \chapter{Evaluation}
-As mentioned in the methodology, the evaluation was carried out during all the development lifecycle allowing improvements with respect to each iteration. This chapter describes how the evaluation of a final prototype was carried out to assess functional and non functional aspects, as well as the technical evaluations that were performed during the development to ensure the accomplishment of the software quality attributes. 
+As mentioned in the methodology, the evaluation was carried out during all the development lifecycle allowing improvements on each iteration. This chapter describes how the evaluation of a final prototype was conducted to assess functional and non-functional aspects, as well as the technical evaluations that were performed during the development to ensure the accomplishment of the software quality attributes. 
 
 \section{Technical Evaluation}
 
 \subsection{Automated tests}
 
-Testing an Android application is particularly challenging because as opposed with iOS, many manufacturers are allowed to distribute their own devices that run this operative system. This means that an application should be able to work in many different phones with different screen sizes, resolutions or specific hardware components. There is not a proven way to test an android application other than trying it out on many distinct devices. This normally is an expensive task, but nowadays emerging services make available cloud based devices so that developers can connect to them remotely to install and test their applications on demand.
+Testing an Android application is particularly challenging because as opposed with iOS, many manufacturers are allowed to distribute their own devices that run this operative system. This means that an application should be able to work in many different phones with different screen sizes, resolutions or specific hardware components. There is no gold standard to test an android application other than trying it out on many distinct devices. This normally is an expensive task, but nowadays emerging services make available cloud-based devices so that developers can connect to them remotely to install and test their applications on demand.
 
 Amazon provides such service in the AWS mobile device farm \footnote{\url{https://aws.amazon.com/device-farm/}}. The application was tested by executing automated tests that explore the interface autonomously to discover how it might react to normal user interaction but also under odd circumstances. Another benefit of this service is that the tests are executed in parallel with a number of devices that are widely used (in this case 15) to encounter errors that might arise from different screen types or hardware components. 
 
-The test starts by uploading a packaged version of the application to the service who is responsible to install it in different devices of the farm. If the application is able to respond to all simulated user input and keep working under a defined period of time then the test for that specific device is passed. Two iterations of this test allowed to find bugs and interface errors that were corrected and optimized. In the first test carried out the application was failing on 5 from 15 devices, the logs of the crash were studied and fixed. A second iteration showed a better outcome, just 1 of the 15 devices were failing the test. Resulting in an improved compatibility.   
+The test starts by uploading a packaged version of the application to the service who is responsible for installing it in different devices of the farm. If the application is able to respond to all simulated user input and keep working under a defined period of time then the test for that specific device is passed. Two iterations of this test allowed to find bugs and interface errors that were corrected and optimised. In the first test carried out the application was failing on 5 from 15 devices, the logs of the crash were studied and fixed. A second iteration showed a better outcome, just 1 of the 15 devices failed the test. This resulted into improved compatibility.   
 
 \begin{figure}[H]
 \begin{adjustbox}{width=1\textwidth,center=\textwidth}
@@ -21,11 +21,11 @@ The test starts by uploading a packaged version of the application to the servic
 \end{figure}
 
 \subsection{Resources usage}
-In order to ensure that the application consumes the adequate number of resources from any device, it is straightforward to inspect the resource usage of the running application. Android provides tools to monitor the usage of the consumed resources such as battery, bandwidth and memory from any application installed. From its usage the following was identified:
+To ensure that the application consumes the adequate number of resources from any device, it is straightforward to inspect the resource usage of the running application. Android provides tools to monitor the usage of the consumed resources such as battery, bandwidth and memory from any application installed. From its usage the following was identified:
 \begin{itemize}
-	\item Memory: The application consumes in total 33mb in storage, which is not extraordinary compact but is feasible given the modern phones storage capabilities. 
-    \item Data usage: For all the development process the application was executed several times during almost a month. It used 2.15mb of data in total. Which is a very good performance for an application of this kind.
-    \item Battery usage: From using the application on repeated occasions in a dedicated device, it was found that the application doesn't reach the list of top battery consumer services in the phone. The reason for this is that the it doesn't employ any background process, all the communication tasks are performed when the app is open. Also, it does not require the GPS to be on as it will use the location already gathered by the internal phone services.
+    \item Memory: The application consumes in total 33mb in storage, which is not extraordinary compact but is feasible given the modern phones storage capabilities.
+    \item Data usage: For all the development process the application was executed several times during almost a month. It used 2.15mb of data in total. This usage is low for an application of this kind.
+    \item Battery usage: From using the application on repeated occasions in a dedicated device, it was found that the application doesn't reach the list of top battery consumer services on the phone. The reason for this is that it doesn't employ any background process, all the communication tasks are performed when the app is open. Also, it does not require the GPS to be on as it will use the location already gathered by the internal phone services.
 \end{itemize}
 
 
@@ -44,15 +44,15 @@ In order to ensure that the application consumes the adequate number of resource
 The evaluation of a third prototype was carried out with potential final users of the application. That is, with volunteers from the AUKAR group, and from general users from the University of Edinburgh. Two methods were employed for this purpose, a usability test complemented by a design critique. 
 
 \subsection{Usability testing}
-To ensure that the functional requirements as well as the usability attributes are accomplished, it is helpful to test the product with real users under real world circumstances. This would outcome on getting a more accurate feedback on how well users are interacting with the product in terms of the remaining selected attributes: usability and performance.
+To ensure that the functional requirements as well as the usability attributes are accomplished, it is helpful to test the product with real users under real-world circumstances. This would outcome on getting a more accurate feedback on how well users are interacting with the product in terms of the remaining selected attributes: usability and performance.
 
-In total there were three participants, one from AUKAR, and two from the University of Edinburgh. All of them were new to the application. For the set-up, an android phone (Motorola Moto G 3rd Gen.) was configured with the AirQueue app and a screen logger. The room was equipped with a video recorder to keep log of the said by the participants. The test was divided in two parts in a one hour individual meeting. 
+In total, there were three participants, one from AUKAR, and three from the University of Edinburgh. All of them were new to the application. For the set-up, an Android phone (Motorola Moto G 3rd Gen.) was configured with the AirQueue app and a screen logger. The room was equipped with a video recorder to keep a log of the said by the participants. The test was divided into two parts in a one-hour individual meeting. 
 
-The first part of the test consisted in executing small tasks or scenarios that should be accomplished within the interface, covering tasks in all visualizations and screens. Participants were asked to perform them individually and to indicate if they were able to do so with ease. Also, some of them were thinking aloud during the test. 
+The first part of the test consisted in executing small tasks or scenarios that should be accomplished within the interface, covering tasks in all visualisations and screens. Participants were asked to perform them individually and to indicate if they were able to do so with ease. Also, some of them were thinking aloud during the test. 
 
 P1, P2 and P3 are the participants of the test. Their ages were 68, 28 and 27 respectively. Their occupations are retired, designer and biologist. Each participant marked whether they were able to finish each of the tasks with ease as instructed with n (No) or y (yes). The findings and the scenarios are shown in Table \ref{tab:test_scenarios}.
 
-In general the users were able to follow up the instructions one by one using the visual and textual cues provided. From the screen video logging was found that users were trying to interact with the elements of the screen to discover their usage (even if some components were not providing any usage), also, the tool-tips served a good guiding function, all the participants used them to understand better the navigation through the interface. The screen with the better success rate was (PEND). 
+In general, the users were able to follow up the instructions one by one using the visual and textual cues provided. From the video screen logging was found that users were trying to interact with the elements of the screen to discover their usage (even if some components were not providing any usage), also, the tool-tips served a good guiding function, all the participants used them to understand better the navigation through the interface. The screen with the better success rate was (PEND). 
 
 \begin{figure}[H]
 \begin{adjustbox}{width=.8\textwidth,center=\textwidth}
@@ -93,7 +93,7 @@ In general the users were able to follow up the instructions one by one using th
 \label{tab:test_scenarios}
 \end{table} 
 
-The second part of the usability test was guided by an usability scale. The users were asked to evaluate their experience ranking their agreement over different statements. Where 1 was strongly disagree and 5 was strongly agree. The employed usability scale and the responses are shown in Table \ref{tab:test_usability_scale}.
+The second part of the usability test was guided by a usability scale. The users were asked to evaluate their experience ranking their agreement over different statements. Where 1 was strongly disagree, and 5 was strongly agree. The employed usability scale and the responses are shown in Table \ref{tab:test_usability_scale}.
 
 \begin{table}[H]
 \centering
@@ -136,7 +136,7 @@ The second part of the usability test was guided by an usability scale. The user
 \end{table} 
 
 \subsection{Design critique}
-At the end of the meeting, participants were asked to give their thoughts on the application. This was an open discussion where the participants where guided through a couple of questions to find out more about what did they like, dislike, find useful or would add to the application. 
+At the end of the meeting, participants were asked to give their thoughts on the application. This was an open discussion where the participants were guided through a couple of questions to find out more about what did they like, dislike, find useful or would add to the application. 
 
 \bigskip
 \textbf{What do you think about the interface?}

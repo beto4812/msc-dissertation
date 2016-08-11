@@ -325,6 +325,7 @@ As the Android OS and APIs (Application Programming Interfaces) are updated over
   \includegraphics[scale=1]{images/android_platform_versions.png}
 \end{adjustbox}
   \caption[Devices running a given version of Android]{Devices running a given version of Android \footnotemark}
+  \label{fig:android_platform_versions}
 \end{figure}
 \footnotetext{\url{https://developer.android.com/about/dashboards/index.html}}
 
@@ -352,12 +353,12 @@ The advice service will be responsible for providing health advice based on the 
 When it comes to provide logic or 'intelligence' to a system for it to make choices (like the ones that are needed for the health advice) there are two general approaches that may be taken: Rule-based systems and machine learning techniques. Rule-based systems or expert systems are a good fit when all the options for the system are known beforehand, and when all the conditions can be easily written as \textit{if else statements}. On the other hand machine learning techniques are useful when the datasets are fairly large and the rules have to be made at execution time. Because of this, the easiest way to provide the system with the capability to give the required health advice given the user's personal circumstances is via an expert system.
 
 \section{First prototype}
-Following the sketched application design and the interaction design methodology, the first prototype was drawn in order to accomplish the user requirements and to start defining how the final interface would look like. As mentioned, the application would be composed of three final distinct visualizations that will achieve the main functional requirements:
+Following the sketched application design and the interaction design methodology, the first prototype was drawn in order to accomplish the user requirements and to start defining how the final interface would look like. As mentioned, the application would be composed of three final distinct visualisations that will achieve the main functional requirements:
 
 \begin{itemize}
-	\item Visualize current air quality and provide health advice.
-    \item Visualize individual pollutants status and information about their sources and effects.
-    \item Visualize individual pollutants over time.
+    \item Visualise current air quality and provide health advice.
+    \item Visualise individual pollutants status and information about their sources and effects.
+    \item Visualise individual pollutants over time.
 \end{itemize}
 
 
@@ -379,8 +380,8 @@ This screen is composed as shown in Figure \ref{fig:first_visualization_first_pr
 
 \subsection{Second visualization}
 
-The second visualizations aims to provide an individual visual hint for each pollutant. The need for this visualization arises from the difficulty to observe how the readings are at a pollutant level without expert understanding of air quality regulations. The overall idea is to show a list of the pollutants that are present at the moment with a visual cue to allow an immediate insight of the reading as well as containing the official measure and the measurement unit. Also, by clicking in each pollutant it will be possible to examine more specific information about the pollutant.
+The second visualisation aims to provide an individual visual hint for each pollutant. The need for this visualisation arises from the difficulty to observe how the readings are at a pollutant level without an expert understanding of air quality regulations. The overall idea is to show a list of the pollutants that are present at the moment with a visual cue to allow an immediate insight of the reading as well as containing the official measure and the measurement unit. Also, by clicking in each pollutant, it will be possible to examine more specific information about the pollutant.
 
 \subsection{Third visualization}
 
-The final visualization will provide the full detail of how the readings were behaving through the day, or in a specific date. The need for this visualization arose from the need by sensitive persons to relate their symptoms to pollution spikes in order to gain knowledge about what might be affecting them at a pollutant level and enable them for better decision support based on this knowledge. For this purpose, a line graph is employed as is the most adequate tool to show readings over time. Also, the same pollutants that were taking part of the first and second visualizations will be consistent in this screen. The difference is that they will be touch-enabled to allow the user to select which  pollutant to visualize as a way of providing interaction and control over the interface to the user. At the top of the screen will be located controls to define the specific date and time of the readings. 
+The final visualisation will provide the full detail of how the readings were behaving through the day, or in a particular date. The need for this visualisation arose from the need by sensitive persons to relate their symptoms to pollution spikes to gain knowledge about what might be affecting them at a pollutant level and enable them for better decision support based on this knowledge. For this purpose, a line graph is employed as is an adequate tool to show readings over time. Also, the same pollutants that were taking part of the first and second visualisations will be consistent in this screen. The difference is that they will be touch-enabled to allow the user to select which pollutant to visualise as a way of providing interaction and control over the interface to the user. At the top of the screen will be located controls to define the specific date and time of the readings. 

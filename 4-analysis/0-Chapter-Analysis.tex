@@ -188,34 +188,36 @@ It is possible that the development could take a hybrid or a native approach, as
 \subsection{Air quality data source}
 It was considered to acquire personal air quality sensors to provide real-time high-resolution data to the system; unfortunately, such devices are still not very feasible as they are costly and become obsolete over time due to loose of accuracy. One example is the Libelium Gases PRO sensor, which costs around \euro{}2000 and has an approximate lifetime of 12 months\footnote{\url{http://www.libelium.com/calibrated-air-quality-gas-dust-particle-matter-pm10-smart-cities/}}. 
 
-As mentioned in the background section there are currently many fixed sensors around Scotland which include different measures depending on the type of the sensor. However, the data sensed by this devices is not exposed through any public API from the Scottish government, but as plain HTML web-pages. One possibility as well is using any third party air quality data source; such as the Breezometer air quality API\footnote{\url{https://breezometer.com/air-quality-api/overview/}} or the OpenAQ API\footnote{\url{https://openaq.org/#/}}. The first one is a private source of air quality data which bills for the queries to the service and may become not very cost-effective, the second is a public API source, but the number of sensors from each city in Scotland are limited compared to the official government sources. An example of this is the city of Glasgow, which from the official sources has 26 fixed sensors and from the public API only 4 are available. Because of this, to have a more accurate air quality source the data will be collected from the official sources and exposed to later query from the device. 
+As mentioned in the background section there are currently many automatic fixed sensors around Scotland that include a variety of pollutants and provide real-time data. However, the data sensed by this devices is not exposed through any public API from the Scottish government, but as plain HTML web-pages. One possibility as well is using any third party air quality data source such as the Breezometer air quality API\footnote{\url{https://breezometer.com/air-quality-api/overview/}} or the OpenAQ API\footnote{\url{https://openaq.org/#/}}. The first one is a private source of air quality data which bills for the queries to the service and may become not very cost-effective, the second is a public API source, but the number of sensors from each city in Scotland are limited compared to the official government sources. An example of this is the city of Glasgow, which from the official sources has 26 fixed automatic sensors and from the public API only 4 are available. Because of this, to have a more accurate air quality source the data will be collected from the official sources and exposed to later query from the device. 
 
-Missing this: (REF)
-http://www.scottishairquality.co.uk/data/
 
 \subsection{Infrastructure as a service}
-IaaS or Infrastructure as a service is a cloud service that provides computing infrastructure on demand. The benefits of using such service as opposed to a traditional approaches are various. First, there is no need to buy, install and maintain a server on a fixed location, reducing the associated costs. Second, setting up an IaaS can be done within minutes, saving precious development time. The following options were considered for setting up an IaaS: 
+
+IaaS or Infrastructure as a Service is a cloud service that provides computing infrastructure on demand. The benefits of using such service as opposed to traditional approaches are various. First, there is no need to buy, install and maintain a server at a fixed location, reducing the associated costs. Second, setting up an IaaS can be done within minutes, saving precious development time. The following options were considered for setting up an IaaS: 
 
 \begin{itemize}
-	\item Google Cloud platform \footnote{\url{https://cloud.google.com/}}
+	\item Google Cloud Platform \footnote{\url{https://cloud.google.com/}}
     \item Amazon Web Services \footnote{\url{https://aws.amazon.com/}}
     \item Microsoft Azure \footnote{\url{https://azure.microsoft.com/en-us/}}
 \end{itemize}
 
-Because of budget constraints, the most cost-effective solution was chosen, being Amazon's free tier the most generous allowing up to 12 month of free usage, as opposed to Microsoft's 30 days trial and Google's 60 days trial.
+Because of budget constraints, the most cost-effective solution was chosen. Amazon's free tier allows up to 12 months of free usage, as opposed to Microsoft's 30 days trial and Google's 60 days trial.
 
 \subsection{Back-end technological choices}
-The back end component of the system will perform 2 functions: Gather the required air quality data and insert it into a database; and provide service to the mobile application. For the  first function the easiest way to do it is via any available web-crawling libraries, such as Jspider\footnote{\url{http://j-spider.sourceforge.net/}} for Java or Scrapy \footnote{\url{http://scrapy.org/}} for Python. Scrapy was chosen because it is a complete and stable framework that can handle the crawling operations in an easy way. 
-For the second component there is a need for a more robust component which can handle multiple queries to the health advice presented in Android. Because of this, Java will be (PEND)
+The back end component of the system will perform two functions: 
+
+\begin{itemize}
+	\item Gather the required air quality data and insert it into a database. The easiest way to do it is via any available web-crawling libraries, such as Jspider\footnote{\url{http://j-spider.sourceforge.net/}} for Java or Scrapy \footnote{\url{http://scrapy.org/}} for Python. Scrapy was chosen because it is a complete and stable framework that can handle the crawling operations in an easy way. 
+	\item Provide service to the mobile application. There is a need for a logic tier to process the input elements for the health advice. Because Java is a stable and reliable framework well suited for most of the tasks that require server side processing and client handling in an optimal way, it has been the chosen technology for the component. 
+\end{itemize}
 
 \subsection{Schema-free database}
-There will be the need to store the air quality readings somewhere to later query from the device. For this, there is the option to use standard SQL databases or schema-free databases. Analyzing the data that will be stored in further detail it will contain the readings gathered from each sensor in Scotland, and specific information such as their name, location and type of sensor. It is simple enough to be inserted without needing any relational schema . Moreover, the transactions between the devices and the database should be as fast as possible; without caring to much for instant reliability (because the sensors are updated at the soonest each hour). Taking into account these factors, it is more suitable the usage of a schema free database or NoSQL, specifically, it will be used a Dynamo NoSQL from the same Amazon Web Services infrastructure because it integrates easily with the already chosen IaaS. 
+There will be the need to store the air quality readings somewhere to later query from the device. For this, there is the option to use standard SQL databases or schema-free databases. Analysing the data that will be stored in further detail, it will contain the readings gathered from each sensor in Scotland, and specific information such as their name, location and type of sensor. The data would be extracted in the form of JSON documents without normal relations between them. Moreover, the transactions between the devices and the database should be as fast as possible; without caring too much for instant reliability (because the sensors are updated at the best each hour). Another advantage of these type of databases is the agility they provide by eliminating the need of schemas. Taking into account these factors, it is more suitable to use a schema-free database or NoSQL. Specifically, it will be used a Dynamo NoSQL from the same Amazon Web Services infrastructure because it integrates easily with the already chosen IaaS.
 
 \subsection{Overall design}
-The overall design of the infrastructure will be as shown in Figure \ref{fig:architecture}. The back-end and the database components will be running in Amazon Web Services, and the Android device will make use of the AWS SDK to make queries to the Dynamo database, and REST services to query the advice server running on Java. (PEND explain more?)
-
+The overall design of the infrastructure is as shown in Figure \ref{fig:architecture}. The back-end and the database components run on Amazon Web Services (AWS). The Android device use the AWS Software Development Kit (SDK) to make queries to the Dynamo database directly to read the air quality data, this to facilitate the mapping between the objects in the database and the Android device. To access the advice service, the approach is to make HTTP GET requests to the Java containers hosted in AWS. 
 \begin{figure}[H]
-\begin{adjustbox}{width=.8\textwidth,center=\textwidth}
+\begin{adjustbox}{width=.65\textwidth,center=\textwidth}
   \centering
   \includegraphics[scale=1]{images/architecture.png}
 \end{adjustbox}
@@ -227,10 +229,9 @@ The overall design of the infrastructure will be as shown in Figure \ref{fig:arc
 The Android application will be the visible interface for the final user. At this point it is pertinent to understand the design choices that can affect our main quality attributes. The design of the user interface and the lower-level issues related to the management of the screen components. 
 
 \subsection{User interface}
-Three distinct screens will accomplish the functional requirements as shown in Figure \ref{fig:chain_of_screens}. The first screen will be responsible for displaying a general overview and the personalised advice, the second screen will show individual pollutants, and the third screen will show individual pollutants over time. There will be another introductory screen to allow users to input the personal details needed for the application.
+Three distinct screens will accomplish the functional requirements as shown in Figure \ref{fig:chain_of_screens}. The first screen will be responsible for displaying a general overview and the personalised advice, the second screen will show individual pollutants, and the third screen will show individual pollutants over time. There will be another initial screen to allow users to input the personal details needed for the application.
 
 One useful guideline at the design level to connect the screen between each other is simplicity. Having many different screens that accomplish many different purposes could result in overwhelming the user, because of this, the screens will be accessible at every time using a tabbed menu and enabling gestures to navigate through them. That is, the screens will become active by selecting a tab, or by swiping between them.
-
 
 \begin{figure}[H]
 \begin{adjustbox}{width=.45\textwidth,center=\textwidth}
@@ -242,9 +243,9 @@ One useful guideline at the design level to connect the screen between each othe
 \end{figure}
 
 \subsection{Activities}
-The former screens will be developed individually by the use of activities. An Activity is the abstraction used by the Android framework to contain the visual and run-time elements of the currently displayed screen. The way Activities are created and maintained in the screen is quite unusual in contrast with standard Java Swing interfaces. It makes use of an event driven life-cycle that must be understood ahead to achieve an smooth and error-free behavior. 
+The previous screens will be developed individually by the use of activities. An Activity is the abstraction employed by the Android framework to contain the visual and run-time elements of the currently displayed screen. The way Activities are created and maintained in the screen is quite unusual in contrast with standard Java Swing interfaces. It makes use of an event driven life-cycle that must be understood ahead to achieve a smooth and error-free behaviour. 
 
-Because the available RAM is limited on a handheld device and it has to be shared with all other running applications, it is not possible to maintain  all activities instances in memory. The activities lifecycle is a workaround for this problem, allowing the Dalvik virtual machine (A virtual machine that runs all Android programs) to automatically determine which activities will be kept in memory. Therefore, it is unknown the time it will be requested to start-up resume or stop and all possible precautions should be taken for it to keep working from any call point .
+Because the available RAM is limited on a handheld device and it has to be shared with all other running applications, it is not possible to maintain all activity instances in memory. The activity lifecycle is a workaround for this problem, allowing the Dalvik virtual machine (A virtual machine that runs all Android programs) to determine automatically which activities will be kept in memory. Because of this, the activities should provide behaviour to be called from any point in the lifecycle.
 
 The lifecycle is illustrated in Figure \ref{fig:activities_lifecycle}. It can be observed that the first method called by Android is the \textit{onCreate()} method, used to instantiate the requested activity and any screen components. Later on, the application can pass to other states until it is stopped and started again from a different entry point to the one it was previously created from. The activities should be able to handle both starting points and restore any state left by the user when the activity was requested to stop. 
 
@@ -259,8 +260,9 @@ The lifecycle is illustrated in Figure \ref{fig:activities_lifecycle}. It can be
 \footnotetext{\url{https://developer.android.com/training/basics/activity-lifecycle/starting.html}}
 
 \subsection{Layouts}
-The main component to render a screen in Android is the Layout. Layouts make use of XML to define the objects in the screen as shown in the example bellow, which renders a \textit{TextView} object followed by a \textit{Button} object. Layouts need to be attached to an activity or fragment to give them behaviour. Once attached, the components defined by the layout can be extracted by using their id's and the method \textit{findViewByID}
+The main component to render a screen in Android is the Layout. Layouts make use of XML to define the objects in the screen as shown in the example bellow, which renders a \textit{TextView} object followed by a \textit{Button} object. Layouts need to be attached to an activity or fragment to give them behaviour. Once attached, the components defined by the Layout can be extracted by using their id's and the method \textit{findViewByID}
 \begin{verbatim}
+
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
@@ -277,9 +279,9 @@ The main component to render a screen in Android is the Layout. Layouts make use
 </LinearLayout>
 \end{verbatim}
 
-It is important to understand the correct coupling of Android layouts because this influences how fast the screen is rendered. The rendering process is called \textit{inflating} and occurs in the \textit{onCreate()} method. As the activities are rendered on the screen children components are attached and may call to render their own layout and so on, potentially slowing down the the application. For this purpose, the Android SDK makes available the Android device monitor that can be employed to understand how much time is taking to render all the components displayed at a given time. 
+It is important to understand the correct coupling of Android layouts because this influences how fast the screen is rendered. The rendering process is called \textit{inflating} and occurs in the \textit{onCreate()} method. As the Activities are rendered on the screen children components are attached and may call to render their own layout and so on, potentially slowing down the the application. For this purpose, the Android SDK makes available the Android device monitor that can be employed to understand how much time is taking to render all the components displayed at a given time. 
 
-The Android device monitor helps to visualise the components that are taking part of the screen at some point in run-time. It shows from the top most element (the root) to the bottom most element (the leaf) how they are attached together and which element of the entire tree is taking the most time to render, helping in the debugging process. As shown in Figure \ref{fig:android_device_monitor} the delaying components are marked with red dots; wich means that the rendering of that specific screen component is among the slowest half of views, the yellow means the view renders faster than the bottom half of the other views and the green means that renders faster than at least half of the other views. The understanding of this tool is important in order to achieve the required performance quality attribute. 
+The Android device monitor helps to visualise the components that are taking part of the screen at some point in run-time. It shows from the topmost element (the root) to the bottommost element (the leaf) how they are attached and which element of the entire tree is taking the most time to render, helping in the debugging process. As shown in Figure \ref{fig:android_device_monitor} the delaying components are marked with red dots; wich means that the rendering of that specific screen component is among the slowest half of views, the yellow means the view renders faster than the bottom half of the other views and the green means that renders faster than at least half of the other views. The understanding of this tool is important in order to achieve the required performance quality attribute. 
 
 \begin{figure}[H]
 \begin{adjustbox}{width=1\textwidth,center=\textwidth}
@@ -291,15 +293,15 @@ The Android device monitor helps to visualise the components that are taking par
 \end{figure}
 
 \subsection{Material design}
-As well as understanding how to achieve an smooth behavior within the application is wise to revise how to make good use of the design principles available to enhance usability and its implied attributes: ease of use and attractiveness. 
+As well as understanding how to achieve a smooth behaviour within the application is wise to revise how to make good use of the design principles available to enhance usability and its implied attributes: ease of use and attractiveness. 
 
-According to Google: \begin{displayquote}Material design is  a visual language for our users that synthesizes the classic principles of good design with the innovation and possibility of technology and science. \end{displayquote} 
+According to Google: \begin{displayquote}Material design is a visual language for our users that synthesises the classic principles of good design with the innovation and possibility of technology and science. \end{displayquote} 
 
-The material design framework helps with principles that address design issues to allow every application user to navigate, understand and use the designed user interface (UI) successfully. It also serves to unify the experience across different devices and screen sizes, so that users that are used to applications in general; will be able to understand in a natural way design cues of new applications. The following principles are adhered:   
+The material design framework helps with principles that address design issues to allow every application user to navigate, understand and use the designed user interface (UI) successfully. It also serves to unify the experience across different devices and screen sizes, so that users that are used to applications in general will be able to understand in a natural way design cues of new applications. The following principles are adhered to: 
 
 \begin{itemize}
-	\item Material: The material metaphor is based on paper and ink as in the real world, in three dimensions using lights and shadows. The intention is to close the gap between the perception of real world elements and digital elements. 
-    \item Graphics: The use of graphical elements such as typographies, icons, adequate colors and images make up a pleasant interface and give hierarchy and meaning. 
+    \item Material: The material metaphor is based on paper and ink as in the real world, in three dimensions using lights and shadows. The intention is to close the gap between the perception of real world elements and digital elements. 
+    \item Graphics: The use of graphical elements such as typographies, icons, adequate colours and images make up a pleasant interface and give hierarchy and meaning. 
     \item Motion: User actions that initiate motion and transform the state of the interface serve as playful cues that help to understand the flow of the interface as well as to provide continuity and feedback. 
 \end{itemize}
 
@@ -315,7 +317,7 @@ The material design framework helps with principles that address design issues t
 \footnotetext{\url{https://material.google.com/}}
 
 \subsection{Targeted devices}
-As the android OS and APIs (Aplication Programming Interfaces) are updated over time; some applications built with later SDK's versions will not be compatible with earlier OS' versions. Because of this, it is important to define the earliest operative system that will be included in the development. For this, considerations such as the number of users that are still using old versions of android and new features that might be useful from newer SDK versions should be studied. For instance, the most used OS distribution nowadays is KitKat which makes use of an API level 19 as shown in Figure \ref{fig:android_platform_versions}.  Unfortunately, it does not offer native support for material elements, which are a strong positive for this development. A workaround for this problem is to include the Android support library\footnote{\url{https://developer.android.com/topic/libraries/support-library/index.html}} which will provide compatibility for features made available in newer versions of Android. The final targeted API is level 19 (KitKat) to use an up to date stable API and to include up to the 79\% of the Android users.  
+As the Android OS and APIs (Application Programming Interfaces) are updated over time some applications built with later SDK versions will not be compatible with earlier OS' versions. Because of this, it is important to define the earliest operating system that will be included in the development. For this, considerations such as the number of users that are still using old versions of Android and new features that might be useful from newer SDK versions should be studied. For instance, the most used OS distribution nowadays is KitKat which makes use of an API level 19 as shown in Figure \ref{fig:android_platform_versions}.  Unfortunately, it does not offer native support for material elements, which are a strong positive for this development. A workaround for this problem is to include the Android support library\footnote{\url{https://developer.android.com/topic/libraries/support-library/index.html}} which will provide compatibility for features made available in newer versions of Android. The final targeted API is level 19 (KitKat) to use an up to date stable API and to include up to the 79\% of the Android users.  
 
 \begin{figure}[H]
 \begin{adjustbox}{width=1\textwidth,center=\textwidth}
@@ -327,7 +329,7 @@ As the android OS and APIs (Aplication Programming Interfaces) are updated over 
 \footnotetext{\url{https://developer.android.com/about/dashboards/index.html}}
 
 \section{Back-end}
-More in detail, the back-end architecture will be composed as shown in Figure \ref{fig:architecture_back_end_detail}. A virtual machine will run Ubuntu Linux because it is a very stable and compatible version of Linux. There was also a possibility to use a custom amazon flavor of Linux, which was not viable due software compatibility issues. The back-end will host two main components to power the application, the data service and the advice service. 
+More in detail, the back-end architecture will be composed as shown in Figure \ref{fig:architecture_back_end_detail}. A virtual machine will run Ubuntu Linux because it is a very stable and compatible version of Linux. There was also a possibility to use a custom Amazon flavour of Linux, which was not viable due software compatibility issues. The back-end will host two main components to power the application, the data service and the advice service. 
 
 \begin{figure}[H]
 \begin{adjustbox}{width=.6\textwidth,center=\textwidth}
@@ -340,15 +342,14 @@ More in detail, the back-end architecture will be composed as shown in Figure \r
 
 
 \subsection{Data Service}
-
- The air data source is the air quality in Scotland website. Because it displays the updated readings in HTML, a web crawler is needed to navigate the readings making use of XPATH selectors to extract the required data. Once extracted, they will be inserted in JSON format directly to the dynamo database.
+ The air data source is the air quality in Scotland website. Because it displays the updated readings in HTML, a web crawler is needed to navigate the readings making use of XPATH selectors to extract the required data. Once extracted, they will be inserted in JSON format directly to the Dynamo database.
  
-A daemon is a program that runs in the background autonomously, this daemon will call the web crawler every half hour to get the most up-to date readings from the air quality readings (They are updated at most each hour). 
+A daemon is a program that runs in the background autonomously; A daemon will call the web crawler every half hour to get the most up-to-date readings from the air quality readings. (They are updated at most each hour). 
 
 \subsection{Advice Service}
-The advice service will be responsible to provide health advice based on the CMEAP\cite{HealthProtectionAgencyfortheCommitteeontheMedicalEffectsofAirPollutants2011}. Before analyzing the techniques that can be considered to translate the advice from the CMEAP into a service, there are few things to notice. The document has different categories of advice based on the sensitivity and age of the persons, they are not simple data statements that can be easily used from a database, but more of logical statements. Also, it is likely that the health statements would need to be modified or expanded in the future. 
+The advice service will be responsible for providing health advice based on the COMEAP report \cite{HealthProtectionAgencyfortheCommitteeontheMedicalEffectsofAirPollutants2011}. Before analysing the techniques that can be considered to translate the advice from the COMEAP report into a service, there are few things to notice. The document has different categories of advice based on the sensitivity and age of the persons. They are not simple data statements that can be easily used from a database, but more of logical statements. For example, from Figure 2.3 we can state that at-risk individuals, who are adults or children when the AQ index is from 7 to 9 points should reduce strenuous physical exertion. Also, it is likely that the health statements would need to be modified or expanded in the future. 
 
-When it comes to provide logic or 'intelligence' to a system for it to take choices (like the ones that are needed for the health advice) there are two general approaches that may be taken. Rule based systems and machine learning techniques. Rule based systems or expert systems are a good fit when all the options for the system are known beforehand; and when all the conditions can be easily written as \textit{if else statements}. On the other hand; machine learning techniques are useful when the datasets are fairly large and the rules have to be made at execution time. Because of this, the easiest way to provide the system the capability to give the required health advice given the user's personal circumstances is via an expert system.
+When it comes to provide logic or 'intelligence' to a system for it to make choices (like the ones that are needed for the health advice) there are two general approaches that may be taken: Rule-based systems and machine learning techniques. Rule-based systems or expert systems are a good fit when all the options for the system are known beforehand, and when all the conditions can be easily written as \textit{if else statements}. On the other hand machine learning techniques are useful when the datasets are fairly large and the rules have to be made at execution time. Because of this, the easiest way to provide the system with the capability to give the required health advice given the user's personal circumstances is via an expert system.
 
 \section{First prototype}
 Following the sketched application design and the interaction design methodology, the first prototype was drawn in order to accomplish the user requirements and to start defining how the final interface would look like. As mentioned, the application would be composed of three final distinct visualizations that will achieve the main functional requirements:

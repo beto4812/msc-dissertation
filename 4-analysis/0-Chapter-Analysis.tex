@@ -88,7 +88,7 @@ There were 11 responses in total, 8 from the patient group and 3 of them from th
   \label{fig:survey_ages}
 \end{figure}
 
-Regarding previous usage of air quality sources, only half of the pollution-sensitive respondents were able to name the websites or applications they were currently using, while all the non-sensitive respondents named at least one source of information. Also, the sensitive respondents who reported the use of air quality sources tended to use them on a more regular basis than non-sensitive users. Reflecting on these answers: sensitive users may be inclined to require a support tool on a regular basis, but not all of them are aware of their existence or does not feel the current sources meet their needs.
+Regarding previous usage of air quality sources, only half of the pollution-sensitive respondents were able to name the websites or applications they were currently using, while all the non-sensitive respondents named at least one source of information. Also, the sensitive respondents who reported the use of air quality sources tended to use them on a more regular basis than non-sensitive users. Reflecting on these answers: sensitive users may be inclined to require a support tool on a regular basis, but not all of them are aware of their existence.
 
 The main findings from the survey were the potential new functionalities that users would like in a new Air Quality application, suggesting that there are unaddressed needs from current AQ sources. These are the main focus of the development of a new AQ application. From Figure \ref{fig:survey_new_features} we can see that the most important need is to visualise different individual pollutants, as current approaches often fail on treating them individually to enable respective decisions on this information. The second most important unaddressed need is to be able to personalise the air quality advice given their personal circumstances. The third most important requirement is to compare and visualise individual pollutants over different periods of time. 
 
@@ -108,7 +108,7 @@ Another interesting outcome was whether including tools to allow users to keep t
  
 Meetings were held with the aforementioned researchers and domain experts to receive input from different points of view. At an early stage of the design process, the first person who showed interest was Mic Starbuck. From his perspective as a person suffering from asthma he mentioned the need for a tool to be able to visualise the relative impact upon a person's health based on different factors: like a person's health status, location, altitude and individual pollutants. He also mentioned that he browsed the web frequently to understand how AQ is behaving at different points of the day to decide whether to go outside for certain activities. 
 
-Later in the process, the Asthma UK Centre for Applied Research (AUKAR) showed interest and a meeting was arranged. It took place with Dr Aziz Sheikh, Lynn, Morrice, Dr Soyiri Ireneous and Catherine Magill. They expressed interest in collaborating with this project as well as participating closely to the School of Informatics in future research. They were presented with mock-ups of an application with visualisation and tracking purposes. Visualisations from the needs of asthma sufferers, like Starbuck, to manage their illness by keeping their digital diary of symptoms and pollution spikes and make better informed choices related to their health. However based on previous work on tracking asthma status they pointed out that applications that rely on user input should take into further consideration the particular context of the user to succeed. For instance, much effort would be required to develop interfaces suited for particular users and their sets of circumstances. From this more focus was put into visualisation and recommendation capabilities than tracking.
+Later in the process, the Asthma UK Centre for Applied Research (AUKAR) showed interest and a meeting was arranged. It took place with Dr Aziz Sheikh, Lynn Morrice, Dr Soyiri Ireneous and Catherine Magill. They expressed interest in collaborating with this project as well as participating closely to the School of Informatics in future research. They were presented with mock-ups of an application with visualisation and tracking purposes. Visualisations from the needs of asthma sufferers, like Starbuck, to manage their illness by keeping their digital diary of symptoms and pollution spikes and make better informed choices related to their health. However, based on previous work on tracking asthma status they pointed out that applications that rely on user input may not be successful because they demand too much from the user. For instance, much effort would be required to develop interfaces suited for particular users and their sets of circumstances. From this more focus was put into visualisation and recommendation capabilities than tracking.
 
 Another meeting was held with Dr Soyiri Ireneous, an asthma researcher, and Catherine Magill. The purpose of this session was to understand in more depth the consequences of air pollution upon a person's health and how they might be presented in an air quality application. The possibility of including health advice was discussed. Data  with an easy to follow health guide is more valuable than data alone because the user can immediately know what to do under special circumstances. Also, Dr Soyiri as a mobile phone user, was concerned with the speed of the application as well the memory and battery usage.
 
@@ -143,7 +143,7 @@ Summarising from the meetings, the following were established as non-functional 
     \item Is efficient (\textbf{Performance}).
     \begin{itemize}
         \item Starts rapidly
-        \item Loads and displays visualizations fast
+        \item Loads and displays visualisations fast
     \end{itemize}
 \end{itemize}
 
@@ -185,7 +185,7 @@ It is possible that the development could take a hybrid or a native approach, as
 \footnotetext{\url{http://julyrapid.com/hybrid-vs-native-mobile-app-decide-5-minutes/}}
 
 \subsection{Air quality data source}
-It was considered to acquire personal air quality sensors to provide real-time high-resolution data to the system; unfortunately, such devices are still not very feasible as they are costly and become obsolete over time due to loose of accuracy. One example is the Libelium Gases PRO sensor, which costs around \euro{}2000 and has an approximate lifetime of 12 months\footnote{\url{http://www.libelium.com/calibrated-air-quality-gas-dust-particle-matter-pm10-smart-cities/}}. 
+It was considered to acquire personal air quality sensors to provide real-time high-resolution data to the system; unfortunately, such devices are still not very feasible as they are costly and become obsolete over time due to loss of accuracy. One example is the Libelium Gases PRO sensor, which costs around \euro{}2000 and has an approximate lifetime of 12 months\footnote{\url{http://www.libelium.com/calibrated-air-quality-gas-dust-particle-matter-pm10-smart-cities/}}. 
 
 As mentioned in the background there are currently many automatic fixed sensors around Scotland that include a variety of pollutants and provide real-time data. However, the data sensed by this devices is not exposed through any public API from the Scottish government but as plain HTML. One possibility as well is using any third party air quality data source such as the Breezometer air quality API\footnote{\url{https://breezometer.com/air-quality-api/overview/}} or the OpenAQ API\footnote{\url{https://openaq.org/#/}}. The first one is a private source of air quality data which bills for the queries to the service and thus not very cost-effective. The second is a public API source but the number of sensors from each city in Scotland are limited compared to the official government sources. An example of this is the city of Glasgow, which from the official sources has 26 fixed automatic sensors and from the public API only 4 are available. Because of this, to have a more accurate air quality source the data will be collected from the official sources and exposed to later query from the device. 
 
@@ -226,7 +226,7 @@ The overall design of the infrastructure is as shown in Figure \ref{fig:architec
 \end{figure}
 
 \section{Mobile application}
-The Android application will be the visible interface for the final user. At this point it is key to understand the design choices that can affect our main quality attributes. The development of the user interface and the lower-level issues related to the management of the screen components. 
+The Android application will be the visible interface for the final user. At this point it is key to understand the design choices that can affect our main quality attributes. These are the development of the user interface and the lower-level issues related to the management of the screen components.
 
 \subsection{User interface}
 Three distinct screens will achieve the functional requirements as shown in Figure \ref{fig:chain_of_screens}. The first screen will be responsible for displaying a general overview and personalised advice. The second screen will show individual pollutants, and the third screen will show individual pollutants over time. There will be another initial screen to allow users to input the personal details needed for the application.
@@ -367,7 +367,7 @@ Following the sketched application design and the interaction design methodology
   \centering
   \includegraphics[scale=1]{images/firstPrototype.png}
 \end{adjustbox}
-  \caption[Frist prototype]{First prototype. From left to right: first, second and third visualization.}
+  \caption[Frist prototype]{First prototype. From left to right: first, second and third visualisation.}
   \label{fig:first_visualization_first_prototype}
 \end{figure}
 

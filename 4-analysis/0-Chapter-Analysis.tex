@@ -10,7 +10,7 @@ The focus of this chapter is to establish and discuss what the software is going
   \label{fig:stakeholders}
 \end{figure}
 
-\section{Users and stakeholders}
+\section{Users and Stakeholders}
 
 The following users were depicted for this development:
 
@@ -35,7 +35,7 @@ To gain input from different perspectives, the following stakeholders were invol
       \end{itemize}
       \item University of Edinburgh School of Informatics researchers: My supervisor Dr Ewan Klein and Catherine Magill, who are both researchers at the University of Edinburgh and part of the Edinburgh living lab which focus is on open data and how it impacts on behaviour and society. They also have a strong background in participatory design and were asked to provide feedback on inner prototypes.
 	\end{itemize}
-	\item Domain experts    
+	\item Domain expert  
    \begin{itemize}
       \item Chief Technology Officer: Simon Chapple as CTO of Datalytics technology, a company with expertise in developing mobile applications for a different range of platforms. His opinion was valuable on technical or design issues that may arise in the development. He was asked for feedback about the design of a prototype of the application.
     The following recommendations were raised in the meeting:
@@ -58,14 +58,14 @@ To gain input from different perspectives, the following stakeholders were invol
     \end{itemize}
 \end{itemize}
 
-\section{Requirements elicitation}
+\section{Requirements Elicitation}
 According to Somerville there are two kinds of requirements \cite{Sommerville2010}:
 \begin{displayquote}
 \begin{itemize}
 
 \item Functional requirements: statements of services the system should provide, how the system should react to particular inputs, and how the system should behave in particular situations
 
-\item Non functional requirements: Constraints on the services or functions offered by the system.... often apply to the system as a whole, rather than individual system features or services.
+\item Non functional requirements: Constraints on the services or functions offered by the system .... often apply to the system as a whole, rather than individual system features or services.
 
 
 \end{itemize}
@@ -84,7 +84,7 @@ There were 11 responses in total, 8 from the patient group and 3 of them from th
   \centering
   \includegraphics[scale=1]{images/ages_survey.png}
 \end{adjustbox}
-  \caption[Survey respondents ages ]{Survey respondents ages}
+  \caption[Survey respondents ages ]{Survey respondents ages.}
   \label{fig:survey_ages}
 \end{figure}
 
@@ -100,7 +100,7 @@ Another interesting outcome was whether including tools to allow users to keep t
   \centering
   \includegraphics[scale=1]{images/new_features.png}
 \end{adjustbox}
-  \caption[New features for an AQ application]{New features for an AQ application}
+  \caption[New features for an AQ application]{New features for an AQ application.}
   \label{fig:survey_new_features}
 \end{figure}
 
@@ -112,7 +112,7 @@ Later in the process, the Asthma UK Centre for Applied Research (AUKAR) showed i
 
 Another meeting was held with Dr Soyiri Ireneous, an asthma researcher, and Catherine Magill. The purpose of this session was to understand in more depth the consequences of air pollution upon a person's health and how they might be presented in an air quality application. The possibility of including health advice was discussed. Data  with an easy to follow health guide is more valuable than data alone because the user can immediately know what to do under special circumstances. Also, Dr Soyiri as a mobile phone user, was concerned with the speed of the application as well the memory and battery usage.
 
-\subsection{Functional requirements}
+\subsection{Functional Requirements}
 
 As time was limited the development covered the first three and most important needs set out by the final users. The following list summarises the final formal functional requirements for the development:
 
@@ -124,7 +124,7 @@ As time was limited the development covered the first three and most important n
     \item Being able to personalise the received advice indicating the personal pollution tolerance or sensitivity.
 \end{itemize}
 
-\subsection{Non functional requirements}
+\subsection{Non Functional Requirements}
 
 Summarising from the meetings, the following were established as non-functional requirements:
 
@@ -148,7 +148,7 @@ Summarising from the meetings, the following were established as non-functional 
 \end{itemize}
 
 
-\section{System architecture}
+\section{System Architecture}
 In order to accomplish the requirements, it is important to consider design choices that could contribute towards qualities that are more adequate for this kind of development. For this, a trade-off between the three qualities of the software will be considered as shown in Figure \ref{fig:balance_attributes}, as it is not always possible to have everything in a system due to the possible conflict of attributes. For example, a highly animated and attractive design would affect the performance of the system and its capability in accomplishing the primary goal. Architectural choices will be taken into account over trade-off.
 
 
@@ -157,11 +157,11 @@ In order to accomplish the requirements, it is important to consider design choi
   \centering
   \includegraphics[scale=1]{images/balanceCircles.png}
 \end{adjustbox}
-  \caption[Finding a balance between software attributes]{Finding a balance between software attributes}
+  \caption[Finding a balance between software attributes]{Finding a balance between software attributes.}
   \label{fig:balance_attributes}
 \end{figure}
 
-\subsection{Development approach and operating system}
+\subsection{Development Approach and Operating System}
 It is possible that the development could take a hybrid or a native approach, as summarised in Table \ref{tab:development_approaches}. In a nutshell, it means that the software could be developed in a web-browser container and therefore be compatible with all devices able to display modern web-pages. Or it could even be be developed using the native software development kit for each system (Android, iOS, etc) therefore making it compatible with that specific operating system. A native development approach carries with it the disadvantage that a new source code would be needed for each operating system. Alternatively it would bring many benefits such as the response speed, being able to use advanced graphics and animation techniques and having an easy access to the native APIs and components of the device (e.g. GPS and gyroscope). In order to gain performance and usability a native approach has been chosen. Consequently, it is important to define the operating system target, which will solely be based on the market share of the most important operating systems according to IDC. \footnote{\url{http://www.idc.com/prodserv/smartphone-os-market-share.jsp}} Android holds a commanding share of 82.8\%, compared to 13.9\% of iOS, and 2.6\% for the Windows phone. Because of this, to target a wider range of mobile phone users the selected operating system for developing the application is Android.
 
 \begin{table}[ht]
@@ -179,25 +179,25 @@ It is possible that the development could take a hybrid or a native approach, as
    \hline
 \end{tabular}
 \end{adjustbox}
-  \caption[Native vs hybrid development approach ]{Native vs hybrid development approach. (Adapted) \footnotemark }
+  \caption[Native vs hybrid development approach ]{Native vs hybrid development approach (Adapted). \footnotemark }
 \label{tab:development_approaches}
 \end{table} 
 \footnotetext{\url{http://julyrapid.com/hybrid-vs-native-mobile-app-decide-5-minutes/}}
 
-\subsection{Air quality data source}
-It was considered to acquire personal air quality sensors to provide real-time high-resolution data to the system; unfortunately, such devices are still not very feasible as they are costly and become obsolete over time due to loss of accuracy. One example is the Libelium Gases PRO sensor, which costs around \euro{}2000 and has an approximate lifetime of 12 months\footnote{\url{http://www.libelium.com/calibrated-air-quality-gas-dust-particle-matter-pm10-smart-cities/}}. 
+\subsection{Air Quality Data Source}
+It was considered to acquire personal air quality sensors to provide real-time high-resolution data to the system; unfortunately, such devices are still not very feasible as they are costly and become obsolete over time due to loss of accuracy. One example is the Libelium Gases PRO sensor, which costs around \euro{}2000 and has an approximate lifetime of 12 months.\footnote{\url{http://www.libelium.com/calibrated-air-quality-gas-dust-particle-matter-pm10-smart-cities/}} 
 
-As mentioned in the background, there are currently many automatic fixed sensors around Scotland that include a variety of pollutants and provide real-time data. However, the data of these devices is not exposed through any public API from the Scottish government but as plain HTML. One possibility as well is using any third party air quality data source such as the Breezometer air quality API\footnote{\url{https://breezometer.com/air-quality-api/overview/}} or the OpenAQ API\footnote{\url{https://openaq.org/#/}}. The first one is a private source of air quality data which bills for the queries to the service and thus not very cost-effective. The second is a public API but the number of sensors from each city in Scotland are limited compared to the official government sources. An example of this is the city of Glasgow, which from the official sources has 26 fixed automatic sensors but from the public API only 4 are available. As a result, to have a more accurate air quality source the data will be collected from the official sources and exposed to later query from the device. 
+As mentioned in the background, there are currently many automatic fixed sensors around Scotland that include a variety of pollutants and provide real-time data. However, the data of these devices is not exposed through any public API from the Scottish government but as plain HTML. One possibility as well is using any third party air quality data source such as the Breezometer air quality API\footnote{\url{https://breezometer.com/air-quality-api/overview/}} or the OpenAQ API\footnote{\url{https://openaq.org/#/}}. The first one is a private source of air quality data which bills for the queries to the service and thus not very cost-effective. The second is a public API but the number of sensors from each city in Scotland are limited compared to the official government sources (the Air Quality in Scotland website \cite{Scottishairquality.co.uk2016}). An example of this is the city of Glasgow, which from the official sources are 26 fixed automatic sensors but from the public API only 4 are available. As a result, to have a more accurate air quality source the data will be collected from the official sources and exposed to later query from the device. 
 
 
-\subsection{Infrastructure as a service}
+\subsection{Infrastructure As a Service}
 
 IaaS or Infrastructure as a Service is a cloud service that provides computing infrastructure on demand. The benefits of using such a service as opposed to traditional approaches are many. First, there is no need to buy, install and maintain a server at a fixed location, reducing associated costs. Second, setting up an IaaS can be done within minutes, saving  development time. The following options were considered for setting up an IaaS: 
 
 \begin{itemize}
-	\item Google Cloud Platform \footnote{\url{https://cloud.google.com/}}
-    \item Amazon Web Services \footnote{\url{https://aws.amazon.com/}}
-    \item Microsoft Azure \footnote{\url{https://azure.microsoft.com/en-us/}}
+	\item Google Cloud Platform\footnote{\url{https://cloud.google.com/}}
+    \item Amazon Web Services\footnote{\url{https://aws.amazon.com/}}
+    \item Microsoft Azure\footnote{\url{https://azure.microsoft.com/en-us/}}
 \end{itemize}
 
 Due to budget constraints, the most cost-effective solution was chosen. Amazon's free tier allows up to 12 months of free usage, as opposed to Microsoft's 30 days trial and Google's 60 days trial.
@@ -210,25 +210,25 @@ The back-end component of the system will perform two functions:
 	\item Provide service to the mobile application. There is a need for a logic tier to process the input elements for the health advice. As Java is a stable and reliable framework,  it is well suited for most of the tasks that require server side processing and client handling in an optimal way.
 \end{itemize}
 
-\subsection{Schema-free database}
+\subsection{Schema-free Database}
 
 Air quality readings will need to be stored for later query from the device. For this, there is the option of using standard SQL databases or schema-free databases. Analysing the data that will be stored in further detail, it will contain the readings gathered from each sensor in Scotland, and specific information such as their name, location and type of sensor. The data would be extracted in the form of JSON documents without normal relations between them. Moreover, the transactions between the devices and the database should be as fast as possible without immediately considering instant reliability as sensors are updated at best each hour. Another advantage of these types of databases is the agility they provide by eliminating the need of schemas. Taking into account these factors, it is more suitable to use a schema-free database or NoSQL. Specifically, it will be used a Dynamo NoSQL from the same Amazon Web Services infrastructure because it integrates easily with the already chosen IaaS.
 
-\subsection{Overall design}
+\subsection{Overall Design}
 The overall design of the infrastructure is as shown in Figure \ref{fig:architecture}. The back-end and the database components run on Amazon Web Services (AWS). The Android device uses the AWS Software Development Kit (SDK) to make queries to the Dynamo database directly to read the air quality data, this to facilitate the mapping between the objects in the database and the Android device. To access the advice service, the approach is to make HTTP GET requests to the Java containers hosted in AWS. 
 \begin{figure}[H]
 \begin{adjustbox}{width=.65\textwidth,center=\textwidth}
   \centering
   \includegraphics[scale=1]{images/architecture.png}
 \end{adjustbox}
-  \caption[Architecture design]{Architecture design}
+  \caption[Architecture design]{Architecture design.}
   \label{fig:architecture}
 \end{figure}
 
-\section{Mobile application}
+\section{Mobile Application}
 The Android application will be the visible interface for the final user. At this point it is key to understand the design choices that can affect our main quality attributes. These are the development of the user interface and the lower-level issues related to the management of the screen components.
 
-\subsection{User interface}
+\subsection{User Interface}
 Three distinct screens will achieve the functional requirements as shown in Figure \ref{fig:chain_of_screens}. The first screen will be responsible for displaying a general overview and personalised advice. The second screen will show individual pollutants and the third individual pollutants over time. There will be another initial screen to allow users to input the personal details needed for the application.
 
 One useful guideline at the design level to connect the screens with each other is simplicity. Having many different screens for different purposes could overwhelm the user, so they will be accessible at every time using a tabbed menu and enabling gestures to navigate through them. That is, the screens will become active by selecting a tab, or by swiping between them.
@@ -238,29 +238,29 @@ One useful guideline at the design level to connect the screens with each other 
   \centering
   \includegraphics[scale=1]{images/screenChain.png}
 \end{adjustbox}
-  \caption[Chain of screens]{Chain of screens}
+  \caption[Chain of screens]{Chain of screens.}
   \label{fig:chain_of_screens}
 \end{figure}
 
 \subsection{Activities}
 The previous screens will be developed individually by the use of activities. An Activity is the abstraction employed by the Android framework to contain the visual and run-time elements of the currently displayed screen. The way Activities are created and maintained in the screen is quite unusual in contrast with standard Java Swing interfaces. It makes use of an event driven life-cycle that must be understood beforehand for a smooth and error-free behaviour. 
 
-As available RAM is limited on a handheld device and it has to be shared with all other running applications, it is not possible to maintain all activity instances in memory. The activity lifecycle is a workaround for this problem, allowing the Dalvik virtual machine (A virtual machine that runs all Android programs) to determine automatically which activities will be kept in memory. Thus, the activities should provide behaviour to be called from any point in the lifecycle.
+As available RAM is limited on a handheld device and it has to be shared with all other running applications, it is not possible to maintain all Activity instances in memory. The Activity lifecycle is a workaround for this problem, allowing the Dalvik virtual machine (A virtual machine that runs all Android programs) to determine automatically which activities will be kept in memory. Thus, the activities should provide behaviour to be called from any point in the lifecycle.
 
-The lifecycle is illustrated in Figure \ref{fig:activities_lifecycle}. It can be observed that the first method called by Android is the \textit{onCreate()} method, used to instantiate the requested activity and any screen components. Later, the application can pass to other states until it is stopped and started again from a different entry point to the one it was previously created from. The activities should be able to handle both starting points and restore any state left by the user when the activity was stopped. 
+The lifecycle is illustrated in Figure \ref{fig:activities_lifecycle}. It can be observed that the first method called by Android is the \textit{onCreate()} method, used to instantiate the requested Activity and any screen components. Later, the application can pass to other states until it is stopped and started again from a different entry point to the one it was previously created from. The activities should be able to handle both starting points and restore any state left by the user when the Activity was stopped. 
 
 \begin{figure}[H]
 \begin{adjustbox}{width=1\textwidth,center=\textwidth}
   \centering
   \includegraphics[scale=1]{images/basic-lifecycle.png}
 \end{adjustbox}
-  \caption[Android activities lifecycle]{Android activities lifecycle\footnotemark}
+  \caption[Android activities lifecycle]{Android activities lifecycle.\footnotemark}
   \label{fig:activities_lifecycle}
 \end{figure}
 \footnotetext{\url{https://developer.android.com/training/basics/activity-lifecycle/starting.html}}
 
 \subsection{Layouts}
-The main component to render a screen in Android is the Layout. Layouts make use of XML to define the objects on the screen. As shown in the example below, it renders a \textit{TextView} object followed by a \textit{Button} object. Layouts need to be attached to an activity or fragment to give them behaviour. Once attached, the components defined by the Layout can be extracted by using their ID's and the method \textit{findViewByID}
+The main component to render a screen in Android is the Layout. Layouts make use of XML to define the objects on the screen. As shown in the example below, it renders a \textit{TextView} object followed by a \textit{Button} object. Layouts need to be attached to an Activity or Fragment to give them behaviour. Once attached, the components defined by the Layout can be extracted by using their ID's and the method \textit{findViewByID}
 \begin{verbatim}
 
 <?xml version="1.0" encoding="utf-8"?>
@@ -288,11 +288,11 @@ The Android device monitor helps to visualise the components taking part on the 
   \centering
   \includegraphics[scale=1]{images/android_device_monitor_2.png}
 \end{adjustbox}
-  \caption[Android device monitor]{Android device monitor}
+  \caption[Android device monitor]{Android device monitor.}
   \label{fig:android_device_monitor}
 \end{figure}
 
-\subsection{Material design}
+\subsection{Material Design}
 As well as understanding how to achieve a smooth behaviour within the application it is wise to revise the good use of design principles available to enhance usability and its implied attributes, ease of use and attractiveness.
 
 According to Google: \begin{displayquote}Material design is a visual language for our users that synthesises the classic principles of good design with the innovation and possibility of technology and science. \end{displayquote} 
@@ -311,12 +311,12 @@ The material design framework helps with principles that address design issues t
   \centering
   \includegraphics[scale=1]{images/material_google.png}
 \end{adjustbox}
-  \caption[Material design framework]{Material design framework \footnotemark}
+  \caption[Android material design framework]{Android material design framework.\footnotemark}
   \label{fig:android_material_design}
 \end{figure}
 \footnotetext{\url{https://material.google.com/}}
 
-\subsection{Targeted devices}
+\subsection{Targeted Devices}
 As the Android OS and APIs (Application Programming Interfaces) are updated over time some applications built with later SDK versions will not be compatible with earlier OS versions. Thus, it is important to define the earliest operating system that will be included in the development. For this, considerations such as the number of users that are still using old versions of Android and new features that might be useful from newer SDK versions should be studied. For instance, the most used OS distribution nowadays is KitKat which makes use of an API level 19 as shown in Figure \ref{fig:android_platform_versions}.  Unfortunately, it does not offer native support for material elements, which are a strong positive for this development. A workaround for this problem is to include the Android support library\footnote{\url{https://developer.android.com/topic/libraries/support-library/index.html}} which will provide compatibility for features made available in newer versions of Android. The final targeted API is level 19 (KitKat) for the use of an up to date stable API and to include up to the 79\% of the Android users.  
 
 \begin{figure}[H]
@@ -324,7 +324,7 @@ As the Android OS and APIs (Application Programming Interfaces) are updated over
   \centering
   \includegraphics[scale=1]{images/android_platform_versions.png}
 \end{adjustbox}
-  \caption[Devices running a given version of Android]{Devices running a given version of Android \footnotemark}
+  \caption[Devices running a given version of Android]{Devices running a given version of Android.\footnotemark}
   \label{fig:android_platform_versions}
 \end{figure}
 \footnotetext{\url{https://developer.android.com/about/dashboards/index.html}}
@@ -337,7 +337,7 @@ Considering in detail, the back-end architecture will be composed as shown in Fi
   \centering
   \includegraphics[scale=1]{images/architecture_back_end_detail.png}
 \end{adjustbox}
-  \caption[Back-end architecture]{Back-end architecture detail}
+  \caption[Back-end architecture]{Back-end architecture detail.}
   \label{fig:architecture_back_end_detail}
 \end{figure}
 
@@ -345,14 +345,14 @@ Considering in detail, the back-end architecture will be composed as shown in Fi
 \subsection{Data Service}
  The air data source is the air quality in Scotland website. As it displays the updated readings in HTML, a web crawler is needed to navigate the readings making use of XPATH selectors to extract the required data. Once extracted, it will be inserted in JSON format directly to the Dynamo database.
  
-A daemon is a program that runs in the background autonomously and will call the web crawler every half hour to get the most up-to-date readings from the air quality readings. (They are updated at the most each hour). 
+A daemon is a program that runs in the background autonomously and will call the web crawler every half hour to get the most up-to-date readings from the air quality readings (They are updated at the most each hour). 
 
 \subsection{Advice Service}
 The advice service will be responsible for providing health advice based on the COMEAP report \cite{HealthProtectionAgencyfortheCommitteeontheMedicalEffectsofAirPollutants2011}. Before analysing the techniques that can be considered to translate the advice from the COMEAP report into a service, there are few matters to notice. The document has different categories of advice based on the sensitivity and age of the people. They are not simple data statements that can be easily used from a database, but more of logical statements. For example, from Figure 2.3 we can state that at-risk individuals, who are adults or children when the AQ index is from 7 to 9 points should reduce strenuous physical exertion. Also, it is likely that the health statements would need to be modified or expanded in the future. 
 
-When it comes to providing logic or 'intelligence' to a system for it to make choices, such as the health advice, there are two general approaches that may be considered: rule-based systems and machine learning techniques. Rule-based systems or expert systems are a good fit when all the options for the system are known beforehand, and when all the conditions can be easily written as \textit{if else statements}. On the other hand machine learning techniques are useful when the datasets are fairly large and the rules have to be made at execution time. Therefore, the easiest way to provide the system with the capability to give the required health advice is via an expert system.
+When it comes to providing logic or \textit{intelligence} to a system for it to make choices, such as the health advice, there are two general approaches that may be considered: rule-based systems and machine learning techniques. Rule-based systems or expert systems are a good fit when all the options for the system are known beforehand, and when all the conditions can be easily written as \textit{if else statements}. On the other hand machine learning techniques are useful when the datasets are fairly large and the rules have to be made at execution time. Therefore, the easiest way to provide the system with the capability to give the required health advice is via an expert system.
 
-\section{First prototype}
+\section{First Prototype}
 Following the sketched application design and the interaction design methodology, the first prototype was drawn in order to meet the user requirements and to start defining how the final interface would look like. As mentioned, the application would be composed of three final distinct visualisations for the main functional requirements:
 
 \begin{itemize}
@@ -367,7 +367,7 @@ Following the sketched application design and the interaction design methodology
   \centering
   \includegraphics[scale=1]{images/firstPrototype.png}
 \end{adjustbox}
-  \caption[Frist prototype]{First prototype. From left to right: first, second and third visualisation}
+  \caption[Frist prototype]{First prototype. From left to right: first, second and third visualisation.}
   \label{fig:first_visualization_first_prototype}
 \end{figure}
 

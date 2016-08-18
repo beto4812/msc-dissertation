@@ -15,7 +15,7 @@ A web crawler is a service that automatically browses the web and extracts usefu
   \centering
   \includegraphics[scale=1]{images/monitoring_summary.png}
 \end{adjustbox}
-  \caption[Pollution sensors list]{Pollution sensors list \footnotemark}
+  \caption[Pollution sensors list]{Pollution sensors list.\footnotemark}
   \label{fig:pollution_sensors_list}
 \end{figure}
 \footnotetext{\url{http://www.scottishairquality.co.uk/latest/summary}}
@@ -57,7 +57,7 @@ Once the URL containing the data is extracted, Scrapy executes another request t
   \centering
   \includegraphics[scale=1]{images/site_readings.png}
 \end{adjustbox}
-  \caption[Edinburgh St Leonard's site readings]{Edinburgh St Leonard's site readings \footnotemark}
+  \caption[Edinburgh St Leonard's site readings]{Edinburgh St Leonard's site readings.\footnotemark}
   \label{fig:pollution_site readings}
 \end{figure}
 \footnotetext{\url{http://www.scottishairquality.co.uk/latest/site-info?site_id=ED3}}
@@ -66,7 +66,7 @@ To extract the pollutant information contained in the table all the \textit{td} 
 
 {\centering
 \begin{BVerbatim}
-td[1]
+//td
 \end{BVerbatim}
 \par
 }\bigskip
@@ -91,9 +91,9 @@ The output of the XPATH selector is highlighted in red:
 </table>                
 \end{Verbatim}
 
-Following the same principle, the remaining meta-data such as the reading time-stamp and the sensor details are extracted. Still, the data is not in its optimal format yet as some readings contain embedded HTML tags that need to be cleaned before any insertion in the database. Fortunately, Scrapy provides a pipeline process before exporting the data into the desired format. The cleaning process is straightforward, by cropping the undesired tags with python strings processing methods. 
+Following the same principle, the remaining meta-data such as the reading time-stamp and the sensor details are extracted. Still, the data is not in its optimal format yet as some readings contain embedded HTML tags that need to be cleaned before any insertion in the database. Fortunately, Scrapy provides a pipeline process before exporting the data into the desired format. The cleaning process is straightforward, by cropping the undesired tags with python string processing methods. 
 
-Once the data is ready to be exported, it is translated into a Python \textit{dict} and inserted right-away in the dynamo table: \bigskip
+Once the data is ready to be exported, it is translated into a Python \textit{dict} and inserted right-away in the Dynamo table: \bigskip
 
 {\centering
 \begin{BVerbatim}
@@ -159,8 +159,8 @@ http://.../Advice/advice?age=?&sensitivity=?&airQualityIndex=?
 \par
 }
 
-\section{Front-end implementation}
-\subsection{Access to air quality data}
+\section{Front-end Implementation}
+\subsection{Access to Air Quality Data}
 Once the services are available to query, the connection between the device and the air quality data hosted on Dynamo has been implemented. Amazon makes available an Android library ready to connect to the database readings\footnote{\url{https://aws.amazon.com/mobile/sdk/}}, included as a dependency in the Android project. In order to handle and represent the database entries in Android, Plain Old Java Objects \textit{POJO's} have been defined. They are simple classes that describe the general structure and contents of a persistent data reading. An example is the following \textit{SensorReading}, which represents the raw \textit{JSON} database reading  and contains a list of the available pollutants, the date it was last updated and the air quality index:
 
 {\centering
@@ -213,7 +213,7 @@ As many sensors may be available to query, the closest sensor should be identifi
 Once location permission has been granted, the application retrieves the last sensed location by the device and a list including all available sensors and their locations from the Dynamo database. The task is to find the closest sensor given the full coordinate list and the current location, which is also in longitude-latitude format. The nearest sensor is chosen by calculating the distance between all options using the distance between two points formula: 
 
 \begin{equation}
-d={\sqrt {(\Delta x)^{2}+(\Delta y)^{2}}}={\sqrt {(x_{2}-x_{1})^{2}+(y_{2}-y_{1})^{2}}}.\,
+d={\sqrt {(\Delta x)^{2}+(\Delta y)^{2}}}={\sqrt {(x_{2}-x_{1})^{2}+(y_{2}-y_{1})^{2}}}\,
 \end{equation}
 
 \subsection{Libraries and custom components}
@@ -254,7 +254,7 @@ To accomplish the second sub-requirement which is including further information 
   \centering
   \includegraphics[scale=1]{images/second_visualization_sub_screen_2.png}
 \end{adjustbox}
-  \caption[Pollutant sources and effects screen]{Pollutant sources and effects screen}
+  \caption[Pollutant sources and effects screen]{Pollutant sources and effects screen.}
   \label{fig:second_visualization_sub_screen}
 \end{figure}
 

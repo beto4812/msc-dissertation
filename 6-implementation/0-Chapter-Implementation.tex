@@ -112,7 +112,7 @@ The Python script mentioned above will be executed repeatedly so as to keep the 
 \par
 }
 
-\subsection{Advice service}
+\subsection{Advice Service}
 The advice service will respond to the requests from the Android device to provide personalised health advice. It is composed of two components: an expert system and a Java servlet to expose the service through HTTP GET requests. 
 
 The first task is to translate the advice offered by the COMEAP report into rules to create a knowledge base. This knowledge base will live in the memory of the Java web container. Whenever it receives new queries it will infer the advice from the asserted facts. The facts representing the advice are like \textit{if-else} statements that focus on three conditions: the pollution level index, the sensitivity of the person and the age of the person. 
@@ -199,7 +199,7 @@ return dynamoDBMapper.query(SensorReading.class, queryExpression);
 \par
 }
 
-\subsection{Localising the closest sensor reading}
+\subsection{Localising the Closest Sensor Reading}
 As many sensors may be available to query, the closest sensor should be identified and displayed. To provide localisation features to the application, it should inform that it has the intention to use such features before installed. To do so, the permission is added to the project \textit{manifest.xml} in the following way: \bigskip
 
 {\centering
@@ -216,15 +216,15 @@ Once location permission has been granted, the application retrieves the last se
 d={\sqrt {(\Delta x)^{2}+(\Delta y)^{2}}}={\sqrt {(x_{2}-x_{1})^{2}+(y_{2}-y_{1})^{2}}}\,
 \end{equation}
 
-\subsection{Libraries and custom components}
+\subsection{Libraries and Custom Components}
 Many android UI components like buttons, bars or windows are already built and made available for public usage. As crafting all the interface components from scratch is an extensive time-consuming task, most UI components were outsourced. Only in very specific cases where no component was found suitable, was it developed from scratch. 
 The following public libraries were used to construct the UI:
 \begin{itemize}
-    \item Deco view charting \footnote{\url{https://github.com/bmarrdev/android-DecoView-charting}}: Provides components to create animated circular charts.
-    \item MPAndroidChart \footnote{\url{https://github.com/PhilJay/MPAndroidChart}}: Provides components to create many different types of charts: lines bar and pie charts among others.
-    \item Android simple tooltip \footnote{\url{https://github.com/douglasjunior/android-simple-tooltip}}: Provides a tool-tip component.
-	\item Material date-time picker \footnote{\url{https://github.com/wdullaer/MaterialDateTimePicker}}: A built-in calendar to select time and date.
-  \item Round corner progress bar \footnote{\url{https://github.com/akexorcist/Android-RoundCornerProgressBar}}: A fancy fully configurable progress bar.
+    \item Deco view charting\footnote{\url{https://github.com/bmarrdev/android-DecoView-charting}}: Provides components to create animated circular charts.
+    \item MPAndroidChart\footnote{\url{https://github.com/PhilJay/MPAndroidChart}}: Provides components to create many different types of charts: lines bar and pie charts among others.
+    \item Android simple tooltip\footnote{\url{https://github.com/douglasjunior/android-simple-tooltip}}: Provides a tool-tip component.
+	\item Material date-time picker\footnote{\url{https://github.com/wdullaer/MaterialDateTimePicker}}: A built-in calendar to select time and date.
+  \item Round corner progress bar\footnote{\url{https://github.com/akexorcist/Android-RoundCornerProgressBar}}: A fancy fully configurable progress bar.
 \end{itemize}
 
 \section{Second Prototype}
@@ -261,7 +261,7 @@ To accomplish the second sub-requirement which is including further information 
 \subsection{Screen 3}
 The third visualisation includes the pollutants over defined periods of time using a line graph. The x-axis represents the time while the y-axis represents the reading. The user is able to select the data on specific dates and hours by using the available date and time buttons. At this iteration it was decided that the user would be able to overlap different pollutants and access them simultaneously on the same graph. This is done by selecting the pollutants on the bottom. Also, different colours are associated with the pollutants to be able to recognise them in the graph.
 
-\section{Third prototype}
+\section{Third Prototype}
 For the making of a third prototype, there were evaluations with different users and stakeholders. Their feedback was taken into account to find what was failing with the second iteration and how to improve this final prototype. 
 
 \begin{figure}[H]

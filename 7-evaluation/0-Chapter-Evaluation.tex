@@ -9,14 +9,14 @@ Testing an Android application is particularly challenging because opposed to iO
 
 Amazon provides such service in the AWS mobile device farm. \footnote{\url{https://aws.amazon.com/device-farm/}} The application was tested by executing automated tests that explore the interface autonomously to discover how it might react to normal user interaction but also under odd circumstances. Another benefit of this service is that the tests are executed in parallel with a number of devices that are widely used (in this case 15) to encounter errors that might arise from different screen types or hardware components. 
 
-The test starts by uploading a packaged version of the application to the service which is then responsible for installing it in different devices of the farm. If the application is able to respond to all simulated user input and keep working under a defined period of time then the test for that specific device has passed. Two iterations of this test allowed for bugs to be found and interface errors were corrected and optimised. In the first test carried out the application was failing on 5 from 15 devices. The logs of the crash were studied and fixed. A second iteration showed a better outcome, just 1 of the 15 devices failed the test. This resulted in improved compatibility.   
+The test starts by uploading a packaged version of the application to the service which is then responsible for installing it in different devices of the farm. If the application is able to respond to all simulated user input and keep working under a defined period of time then the test for that specific device has passed. Two iterations of this test allowed for bugs to be found and interface errors were corrected and optimised. In the first test carried out the application was failing on 5 from 15 devices. The logs of the crash were studied and the encountered errors were fixed. A second iteration showed a better outcome, just 1 of the 15 devices failed the test. This resulted in improved compatibility.   
 
 \begin{figure}[H]
 \begin{adjustbox}{width=1\textwidth,center=\textwidth}
   \centering
   \includegraphics[scale=1]{images/automated_tests.png}
 \end{adjustbox}
-  \caption[Automated tests on AWS]{Automated tests on AWS}
+  \caption[Automated tests on AWS]{Automated tests on AWS.}
   \label{fig:automated_tests}
 \end{figure}
 
@@ -34,7 +34,7 @@ To ensure that the application consumes the adequate number of resources off any
   \centering
   \includegraphics[scale=1]{images/resource_usage.png}
 \end{adjustbox}
-  \caption[Application resource usage]{Application resource usage}
+  \caption[Application resource usage]{Application resource usage.}
   \label{fig:automated_tests}
 \end{figure}
 
@@ -104,7 +104,7 @@ From this part of the test it was confirmed that the overall satisfaction of the
    \hline
 \end{tabular}
 \end{adjustbox}
-  \caption[Usability testing scenarios]{Usability testing scenarios and results}
+  \caption[Usability testing scenarios]{Usability testing scenarios and results.}
 \label{tab:test_scenarios}
 \end{table} 
 

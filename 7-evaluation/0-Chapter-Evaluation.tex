@@ -7,7 +7,7 @@ As mentioned in the methodology, the evaluation was carried out throughout the d
 
 Testing an Android application is particularly challenging because opposed to iOS, many manufacturers are allowed to distribute their own devices that run this operating system. This means that an application should be able to work in many different phones with different screen sizes, resolutions or specific hardware components. There is no gold standard to testing an android application other than trying it out on many distinct devices. This normally is an expensive task, but nowadays emerging services make cloud-based devices available so that developers can connect to them remotely to install and test their applications on demand.
 
-Amazon provides such service in the AWS mobile device farm \footnote{\url{https://aws.amazon.com/device-farm/}}. The application was tested by executing automated tests that explore the interface autonomously to discover how it might react to normal user interaction but also under odd circumstances. Another benefit of this service is that the tests are executed in parallel with a number of devices that are widely used (in this case 15) to encounter errors that might arise from different screen types or hardware components. 
+Amazon provides such service in the AWS mobile device farm. \footnote{\url{https://aws.amazon.com/device-farm/}} The application was tested by executing automated tests that explore the interface autonomously to discover how it might react to normal user interaction but also under odd circumstances. Another benefit of this service is that the tests are executed in parallel with a number of devices that are widely used (in this case 15) to encounter errors that might arise from different screen types or hardware components. 
 
 The test starts by uploading a packaged version of the application to the service which is then responsible for installing it in different devices of the farm. If the application is able to respond to all simulated user input and keep working under a defined period of time then the test for that specific device has passed. Two iterations of this test allowed for bugs to be found and interface errors were corrected and optimised. In the first test carried out the application was failing on 5 from 15 devices. The logs of the crash were studied and fixed. A second iteration showed a better outcome, just 1 of the 15 devices failed the test. This resulted in improved compatibility.   
 
@@ -21,7 +21,7 @@ The test starts by uploading a packaged version of the application to the servic
 \end{figure}
 
 \subsection{Resources usage}
-To ensure that the application consumes the adequate number of resources off any device the resource usage of the running application was explored. Android provides tools to monitor the usage of the consumed resources such as battery, bandwidth and memory from any application installed. From its usage the following was identified:
+To ensure that the application consumes the adequate number of resources off any device, the resource usage of the running application was explored. Android provides tools to monitor the usage of the consumed resources such as battery, bandwidth and memory from any application installed. From its usage the following was identified:
 \begin{itemize}
     \item Memory: The application consumes in total 33mb in storage, which is feasible given the modern phones storage capabilities. This storage space was needed in order to provide a better user experience through graphics and animations.
     \item Data usage: Throughout the development process the application was executed several times during almost a month. It used 2.15mb of data in total. This usage is low for an application of this kind.
@@ -63,6 +63,8 @@ The findings from this part of the test is that users were able to navigate the 
 From this part of the test it was confirmed that the overall satisfaction of the inter-face was good. The users felt that the interface displayed quick and smooth behavior that allowed them navigate with ease the different screens. Another interesting outcome is that the simple colour and textual indicators (good/regular/bad and green/yellow/red) helped the users to understand the air quality status, suggesting they might be a good instrument to disseminate data in a quick and understandable way. The main outcome is that the respondents stated they would use the application to know more about pollution in general and that its usage would help them to make better choices, suggesting that AirQueue could bring behavioural change and that it usage could be a good fit in their lives.
 
 \end{itemize}
+
+
 
 
 \iffalse
@@ -114,7 +116,7 @@ From this part of the test it was confirmed that the overall satisfaction of the
 \begin{tabular}{llrrrr}
   \hline
    - & Statement & P1 & P2 & P3 & P4 \\ \hline
-   Overview & \specialcell[t]{1.-I think that the first screen (overview) was easy to\\understand/navigate.} & 3 & 5 & -  & 5 \\
+   Overview & \specialcell[t]{1.-I think that the first screen (overview) was easy to\\understand/navigate.} & 3 & 5 & 4  & 5 \\
    Overview &\specialcell[t]{2.- I think that the 'overview' screen would help me to understand the\\current situation of air quality.} & 5 & 4 & 5 & 5 \\
    Overview &\specialcell[t]{3.- I think that the personalised health 'advice' would help me to take better\\choices through the day.} & 5 & 4 & 5 &4 \\
    Overview &\specialcell[t]{4.- I feel that is useful to know the location of the closest air quality sensor.} & 5 & 5 & 4 & 4 \\
@@ -144,7 +146,7 @@ From this part of the test it was confirmed that the overall satisfaction of the
    \hline
 \end{tabular}
 \end{adjustbox}
-  \caption[Usability testing scenarios]{Usability testing scenarios and results}
+  \caption[Usability testing scale]{Usability testing scale and results}
 \label{tab:test_usability_scale}
 \end{table} 
 
@@ -187,3 +189,5 @@ At the end of the meeting, participants were asked to give their thoughts on the
 	\item \quotes{I like the way you can adjust, presumably once you've adjusted it, everything else in the screen takes it into account.} - Referring the personalised health advice.
 \end{itemize}
 
+\subsection{Summary}
+The outcomes from the components of the test with users were positive. All participants were able to use the application in a confident way and believed that the application would make their lives easier. As a remark, it should be noted the relation between the ages of the participants and their outcome on both parts of the test. While P2, P3 and P4 where able to understand the scenarios whit ease and independently, P1 struggled on one task. Furthermore, P1 believed that some screens were slightly more difficult to use and that he would need to learn before using the app. Thus, is an important representative user because those from an older generation are at less ease with smart phone apps.
